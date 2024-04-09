@@ -1,0 +1,35 @@
+import deque
+const N_PUT_LEFT = 1
+const N_PUT_RIGHT = 1
+const N_GET_LEFT = 1
+const N_GET_RIGHT = 1
+d = deque.Deque()
+
+def put_left_test(self):
+    print("call left put", self)
+    deque.put_left(?d, (self, "left"))
+    print("done left put", self)
+
+def put_right_test(self):
+    print("call right put", self)
+    deque.put_right(?d, (self, "rights"))
+    print("done right put", self)
+
+def get_left_test(self):
+    print("call left get", self)
+    let v = deque.get_left(?d):
+        print("done left get", self, v)
+
+def get_right_test(self):
+    print("call right get", self)
+    let v = deque.get_right(?d):
+        print("done right get", self, v)
+
+for i in {1..N_PUT_LEFT}:
+    spawn put_left_test(i)
+for i in {1..N_PUT_RIGHT}:
+    spawn put_right_test(i)
+for i in {1..N_GET_LEFT}:
+    spawn get_left_test(i)
+for i in {1..N_GET_RIGHT}:
+    spawn get_right_test(i)
