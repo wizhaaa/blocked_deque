@@ -1,9 +1,9 @@
-import deque
+import bdeque
 const N_PUT_LEFT = 1
 const N_PUT_RIGHT = 1
 const N_GET_LEFT = 1
 const N_GET_RIGHT = 1
-d = deque.Deque()
+d = deque.Bdeque()
 
 def put_left_test(self):
     print("call left put", self)

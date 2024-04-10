@@ -1,30 +1,36 @@
-from synch import Lock, acquire, release
+from synch import Lock, acquire, release, wait, Condition, notify, notifyAll
 from alloc import malloc, free
 
-def Deque() returns result:
+def Bdeque(n) returns initial:
     '''
     returns the initial value of an empty deque
     '''
-    let dummy_tail = malloc({ .value: None, .next: None, .prev: None}):
-        let dummy_head = malloc({ .value: None, .next: None, .prev: None}):
-            dummy_head->next = dummy_tail
-            dummy_tail->prev = dummy_head
-            result = { .head: dummy_head, .tail: dummy_tail, .len:0, .lock: Lock()}
+    initial = { 
+        .data: [None,] *n, .head: 0, .tail: 1 % n, .count: 0, .size: n, 
+        .p_cond: Condition(), .g_cond: Condition(), .lock: Lock()
+    }
+# put_condition = wait for it to be not full! not_full
+# get_condition = wait for it to be not empty! not_empty 
 
 def put_left(d, v):
     '''
     d points to a deque and v is some value. 
     Put v at the right-end of the deque. 
     '''
-    let node = malloc({ .value: v, .next: None, .prev: None}):
-        acquire(?d->lock)
-        let next = d->head->next:
-            node->next = next
-            node->prev = d->head
-            d->head->next = node
-            next->prev = node
-        d->len += 1
-        release(?d->lock)
+    acquire(?d->lock)
+    if d->count == d->size:
+        wait(?d->p_cond, ?d->lock)
+    d->data[d->head] = v 
+    d->head = (d->head % d->size) + 1 
+    d->count += 1
+    # notify all that it is no longer empty (if count is now 1) 
+    if d->count == 1:
+        notifyAll(?d->g_cond) 
+    # only notify put_condition (not full) 
+    
+    notify(?d->p_cond) 
+    
+    release(?d->lock)
 
 def put_right(d, v):
     '''
