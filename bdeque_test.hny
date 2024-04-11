@@ -7,7 +7,7 @@ const N_GET_RIGHT = 1
 const N_PEEK_LEFT = 0
 const N_PEEK_RIGHT = 1
 
-d = deque.Bdeque(SIZE)
+d = bdeque.Bdeque(SIZE)
 
 def put_left_test(self):
     print("call left put", self)
@@ -16,7 +16,7 @@ def put_left_test(self):
 
 def put_right_test(self):
     print("call right put", self)
-    dbeque.put_right(?d, (self, "rights"))
+    bdeque.put_right(?d, (self, "rights"))
     print("done right put", self)
 
 def get_left_test(self):

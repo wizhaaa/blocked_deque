@@ -91,7 +91,7 @@ def peek_left(d) returns left:
     acquire(?d->lock)
     while d->count == 0:
         wait(?d->not_empty, ?d->lock)
-    left = d->data[d->head]
+    left = d->data[(d->head + 1) % d->n]
     release(?d->lock)
 
 def peek_right(d) returns right: 
@@ -103,5 +103,5 @@ def peek_right(d) returns right:
     acquire(?d->lock)
     while d->count == 0:
         wait(?d->not_empty, ?d->lock)
-    right = d->data[d->tail]
+    right = d->data[(d->tail - 1) % d->size]
     release(?d->lock)
