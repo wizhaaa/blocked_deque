@@ -1,0 +1,93 @@
+Issue: Safety violation
+
+Modules:
+  __main__: /Users/willzhang/Desktop/nyaow/4410 Operating Systems /blocked_deque/bdeque_test.hny
+  bdeque: /Users/willzhang/Desktop/nyaow/4410 Operating Systems /blocked_deque/bdeque.hny
+
+================================================
+Running thread T0: __init__()
+mode:  runnable atomic
+stack: ['[]']
+state id: 1
+================================================
+
+Step 1:
+  program counter:   0
+  hvm code:          Frame __init__()
+  explanation:       pop argument () and run method "__init__"
+  module:            __main__
+  start statement:   line=1 column=1
+  end statement:     line=54 column=34
+  source code:       import bdeque
+  call trace:        __init__()
+  stack:             [{:}]
+
+Step 2:
+  program counter:   1
+  hvm code:          Jump 224
+  explanation:       jump over method definition: set program counter to 224
+  module:            bdeque
+  start statement:   line=1 column=1
+  end statement:     line=1 column=29
+  source code:       def Bdeque(n) returns buffer:
+                     ^^^
+
+Step 3:
+  program counter:   224
+  hvm code:          Push ?deque
+  explanation:       push constant ?deque
+  module:            __main__
+  start statement:   line=10 column=1
+  end statement:     line=10 column=22
+  source code:       d = deque.Bdeque(SIZE)
+                         ^^^^^^^^^^^^
+  stack:             [{:}, ?deque]
+
+Step 4:
+  program counter:   225
+  hvm code:          Push "Bdeque"
+  explanation:       push constant "Bdeque"
+  source code:       d = deque.Bdeque(SIZE)
+                              ^^^^^^^
+  stack:             [{:}, ?deque, "Bdeque"]
+
+Step 5:
+  program counter:   226
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("Bdeque", ?deque); push result (?deque["Bdeque"])
+  source code:       d = deque.Bdeque(SIZE)
+                         ^^^^^^^^^^^^
+  stack:             [{:}, ?deque["Bdeque"]]
+
+Step 6:
+  program counter:   227
+  hvm code:          Push 2
+  explanation:       push constant 2
+  source code:       d = deque.Bdeque(SIZE)
+                                      ^^^^
+  stack:             [{:}, ?deque["Bdeque"], 2]
+
+Step 7:
+  program counter:   228
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values (2, ?deque["Bdeque"]); push result (?deque["Bdeque"][2])
+  source code:       d = deque.Bdeque(SIZE)
+                         ^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, ?deque["Bdeque"][2]]
+
+Step 8:
+  program counter:   229
+  hvm code:          Load
+  explanation:       pop an address and push the value at the address
+  start expression:  line=10 column=5
+  end expression:    line=10 column=22
+  new mode:          failed
+  stack:             [{:}]
+  operation failed:  Load ?deque["Bdeque"][2]: can't load
+
+================================================
+Final state
+================================================
+Threads:
+  T0: pc=229 failed atomic __init__()
+Variables:

@@ -7,78 +7,101 @@ def Bdeque(n) returns initial:
     '''
     initial = { 
         .data: [None,] *n, .head: 0, .tail: 1 % n, .count: 0, .size: n, 
-        .p_cond: Condition(), .g_cond: Condition(), .lock: Lock()
+        .not_full: Condition(), .not_empty: Condition(), .lock: Lock()
     }
 # put_condition = wait for it to be not full! not_full
+# put? not_full
 # get_condition = wait for it to be not empty! not_empty 
+# get? not_empty
 
 def put_left(d, v):
     '''
     d points to a deque and v is some value. 
+    If the deque is full, the operation should wait.
     Put v at the right-end of the deque. 
     '''
     acquire(?d->lock)
-    if d->count == d->size:
-        wait(?d->p_cond, ?d->lock)
+    while d->count == d->size:
+        wait(?d->not_full, ?d->lock)
     d->data[d->head] = v 
-    d->head = (d->head % d->size) + 1 
+    d->head = (d->head - 1) % d->size
     d->count += 1
     # notify all that it is no longer empty (if count is now 1) 
     if d->count == 1:
-        notifyAll(?d->g_cond) 
-    # only notify put_condition (not full) 
-    
-    notify(?d->p_cond) 
-    
+        notifyAll(?d->not_empty) 
     release(?d->lock)
 
 def put_right(d, v):
     '''
     d points to a deque and v is some value. 
+    If the deque is full, the operation should wait.
     Put v at the left-end of the deque. 
     '''
-    let node = malloc({ .value: v, .next: None, .prev: None}):
-        acquire(?d->lock)
-        let prev = d->tail->prev:
-            node->prev = prev
-            node->next = d->tail
-            d->tail->prev = node
-            prev->next = node
-        d->len += 1
-        release(?d->lock)
+    acquire(?d->lock)
+    while d->count == d->size:
+        wait(?d->not_full, ?d->lock)
+    d->data[d->tail] = v 
+    d->tail = (d->head + 1) % d->size
+    d->count += 1
+    # notify all that it is no longer empty (if count is now 1) 
+    if d->count == 1:
+        notifyAll(?d->not_empty) 
+    release(?d->lock)
     
-def get_left(d) returns result:
+def get_left(d) returns left:
     '''
     d points to a deque. 
-    If deque is empty, the operation should return None. 
+    If deque is empty, the operation should wait.
     Otherwise, it should remove and return the value at the left-end of the deque. 
     '''
     acquire(?d->lock)
-    let head = d->head->next:
-        if d->len != 0:
-            result = head->value
-            d->head->next = head->next
-            d->head->next->prev = d->head
-            d->len -= 1
-            free(head)
-        else:
-            result = None 
+    while d->count == 0:
+        wait(?d->not_empty, ?d->lock)
+    d->head = (d->head + 1) % d->size
+    left = d->data[d->head]
+    d->count -= 1
+    # notify all that it is no longer full (if count is now = size) 
+    if d->count == (d->size - 1):
+        notifyAll(?d->not_full) 
     release(?d->lock)
 
-def get_right(d) returns result:
+def get_right(d) returns right:
     '''
     d points to a deque. 
-    If deque is empty, the operation should return None. 
+    If deque is empty, the operation should wait. 
     Otherwise, it should remove and return the value at the right-end of the deque. 
     '''
     acquire(?d->lock)
-    let tail = d->tail->prev:
-        if d->len != 0:
-            result = tail->value
-            d->tail->prev = tail->prev
-            d->tail->prev->next = d->tail
-            d->len -= 1
-            free(tail)
-        else:
-            result = None
+    while d->count == 0:
+        wait(?d->not_empty, ?d->lock)
+    d->tail = (d->head - 1) % d->size
+    right = d->data[d->tail]
+    d->count -= 1
+    # notify all that it is no longer full (if count is now = size) 
+    if d->count == (d->size - 1):
+        notifyAll(?d->not_full) 
+    release(?d->lock)
+
+def peek_left(d) returns left: 
+    '''
+    d points to a deque. 
+    If the deque is empty, the operation should wait. 
+    Otherwise, after waiting, it should return the left-most value. 
+    '''
+    acquire(?d->lock)
+    while d->count == 0:
+        wait(?d->not_empty, ?d->lock)
+    left = d->data[d->head]
+    release(?d->lock)
+
+def peek_right(d) returns right: 
+    '''
+    d points to a deque. 
+    If the deque is empty, the operation should wait. 
+    Otherwise, after waiting, it should return the right-most value. 
+    '''
+    acquire(?d->lock)
+    while d->count == 0:
+        wait(?d->not_empty, ?d->lock)
+    right = d->data[d->tail]
     release(?d->lock)
