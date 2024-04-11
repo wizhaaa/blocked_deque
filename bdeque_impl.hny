@@ -74,7 +74,7 @@ def get_right(d) returns right:
     acquire(?d->lock)
     while d->count == 0:
         wait(?d->not_empty, ?d->lock)
-    d->tail = (d->head - 1) % d->size
+    d->tail = (d->tail - 1) % d->size
     right = d->data[d->tail]
     d->count -= 1
     # notify all that it is no longer full (if count is now = size) 
