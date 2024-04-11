@@ -41,7 +41,7 @@ def put_right(d, v):
     while d->count == d->size:
         wait(?d->not_full, ?d->lock)
     d->data[d->tail] = v 
-    d->tail = (d->head + 1) % d->size
+    d->tail = (d->tail + 1) % d->size
     d->count += 1
     # notify all that it is no longer empty (if count is now 1) 
     if d->count == 1:

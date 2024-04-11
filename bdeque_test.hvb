@@ -2430,7 +2430,7 @@ Step 278:
   explanation:       push value (?d) of variable "d"
   start statement:   line=44 column=5
   end statement:     line=44 column=37
-  source code:       d->tail = (d->head + 1) % d->size
+  source code:       d->tail = (d->tail + 1) % d->size
                      ^
   stack:             [{:}, [], 28418, { "self": 2 }, ?d]
 
@@ -2438,7 +2438,7 @@ Step 279:
   program counter:   1412
   hvm code:          Push "tail"
   explanation:       push constant "tail"
-  source code:       d->tail = (d->head + 1) % d->size
+  source code:       d->tail = (d->tail + 1) % d->size
                         ^^^^
   stack:             [{:}, [], 28418, { "self": 2 }, ?d, "tail"]
 
@@ -2446,7 +2446,7 @@ Step 280:
   program counter:   1413
   hvm code:          2-ary AddArg
   explanation:       pop 2 values ("tail", ?d); push result (?d["tail"])
-  source code:       d->tail = (d->head + 1) % d->size
+  source code:       d->tail = (d->tail + 1) % d->size
                      ^^^^^^^
   stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"]]
 
@@ -2454,74 +2454,74 @@ Step 281:
   program counter:   1414
   hvm code:          LoadVar d
   explanation:       push value (?d) of variable "d"
-  source code:       d->tail = (d->head + 1) % d->size
+  source code:       d->tail = (d->tail + 1) % d->size
                                 ^
   stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], ?d]
 
 Step 282:
   program counter:   1415
-  hvm code:          Push "head"
-  explanation:       push constant "head"
-  source code:       d->tail = (d->head + 1) % d->size
+  hvm code:          Push "tail"
+  explanation:       push constant "tail"
+  source code:       d->tail = (d->tail + 1) % d->size
                                    ^^^^
-  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], ?d, "head"]
+  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], ?d, "tail"]
 
 Step 283:
   program counter:   1416
   hvm code:          2-ary AddArg
-  explanation:       pop 2 values ("head", ?d); push result (?d["head"])
-  source code:       d->tail = (d->head + 1) % d->size
+  explanation:       pop 2 values ("tail", ?d); push result (?d["tail"])
+  source code:       d->tail = (d->tail + 1) % d->size
                                 ^^^^^^^
-  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], ?d["head"]]
+  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], ?d["tail"]]
 
 Step 284:
   program counter:   1417
   hvm code:          Load
-  explanation:       pop address (?d["head"]) and push value (0)
+  explanation:       pop address (?d["tail"]) and push value (1)
   start expression:  line=44 column=16
   end expression:    line=44 column=22
   call trace:        put_right_test(2) --> put_right(?d, [2, "rights"])
-  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 0]
+  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 1]
 
 Step 285:
   program counter:   1418
   hvm code:          Push 1
   explanation:       push constant 1
-  source code:       d->tail = (d->head + 1) % d->size
+  source code:       d->tail = (d->tail + 1) % d->size
                                           ^
-  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 0, 1]
+  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 1, 1]
 
 Step 286:
   program counter:   1419
   hvm code:          2-ary +
-  explanation:       pop 2 values (1, 0); add the integers; push result (1)
-  source code:       d->tail = (d->head + 1) % d->size
+  explanation:       pop 2 values (1, 1); add the integers; push result (2)
+  source code:       d->tail = (d->tail + 1) % d->size
                                 ^^^^^^^^^^^
-  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 1]
+  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 2]
 
 Step 287:
   program counter:   1420
   hvm code:          LoadVar d
   explanation:       push value (?d) of variable "d"
-  source code:       d->tail = (d->head + 1) % d->size
+  source code:       d->tail = (d->tail + 1) % d->size
                                                ^
-  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 1, ?d]
+  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 2, ?d]
 
 Step 288:
   program counter:   1421
   hvm code:          Push "size"
   explanation:       push constant "size"
-  source code:       d->tail = (d->head + 1) % d->size
+  source code:       d->tail = (d->tail + 1) % d->size
                                                   ^^^^
-  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 1, ?d, "size"]
+  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 2, ?d, "size"]
 
 Step 289:
   program counter:   1422
   hvm code:          2-ary AddArg
   explanation:       pop 2 values ("size", ?d); push result (?d["size"])
-  source code:       d->tail = (d->head + 1) % d->size
+  source code:       d->tail = (d->tail + 1) % d->size
                                                ^^^^^^^
-  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 1, ?d["size"]]
+  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 2, ?d["size"]]
 
 Step 290:
   program counter:   1423
@@ -2530,22 +2530,23 @@ Step 290:
   start expression:  line=44 column=31
   end expression:    line=44 column=37
   call trace:        put_right_test(2) --> put_right(?d, [2, "rights"])
-  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 1, 2]
+  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 2, 2]
 
 Step 291:
   program counter:   1424
   hvm code:          2-ary %
-  explanation:       pop 2 values (2, 1); second value modulo the first; push result (1)
-  source code:       d->tail = (d->head + 1) % d->size
+  explanation:       pop 2 values (2, 2); second value modulo the first; push result (0)
+  source code:       d->tail = (d->tail + 1) % d->size
                                ^^^^^^^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 1]
+  stack:             [{:}, [], 28418, { "self": 2 }, ?d["tail"], 0]
 
 Step 292:
   program counter:   1425
   hvm code:          Store
-  explanation:       pop value (1) and address (?d["tail"]) and store
-  source code:       d->tail = (d->head + 1) % d->size
+  explanation:       pop value (0) and address (?d["tail"]) and store
+  source code:       d->tail = (d->tail + 1) % d->size
                      ^^^^^^^^^
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 0, "data": [ None, [ 2, "rights" ] ], "head": 0, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 } }
   call trace:        put_right_test(2) --> put_right(?d, [2, "rights"])
   stack:             [{:}, [], 28418, { "self": 2 }]
 
@@ -2614,7 +2615,7 @@ Step 300:
   explanation:       pop value (1) and address (?d["count"]) and store
   source code:       d->count += 1
                      ^^^^^^^^^^^
-  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 1, "data": [ None, [ 2, "rights" ] ], "head": 0, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 1 } }
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 1, "data": [ None, [ 2, "rights" ] ], "head": 0, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 } }
   call trace:        put_right_test(2) --> put_right(?d, [2, "rights"])
   stack:             [{:}, [], 28418, { "self": 2 }]
 
@@ -3017,7 +3018,7 @@ Step 345:
   explanation:       pop value (False) and address (?d["lock"]) and store
   source code:       !binsema = False
                      ^^^^^^^^^^
-  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 1, "data": [ None, [ 2, "rights" ] ], "head": 0, "lock": False, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 1 } }
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 1, "data": [ None, [ 2, "rights" ] ], "head": 0, "lock": False, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 } }
   stack:             [{:}, [], 28418, { "self": 2 }, [], 23202, {:}]
 
 Step 346:
@@ -3125,13 +3126,11 @@ Step 356:
   stack:             [{:}, [ "done right put", 2 ]]
 
 ================================================
-Running thread T6: peek_right_test(1)
+Running thread T1: put_left_test(1)
 mode:  runnable
 stack: ['1']
 other threads:
   T0: pc=1966 terminated atomic __init__()
-  T1: pc=1729 runnable put_left_test(1)
-    about to run method put_left_test with argument 1
   T2: pc=1758 runnable put_right_test(1)
     about to run method put_right_test with argument 1
   T3: pc=1784 runnable put_right_test(2)
@@ -3140,159 +3139,225 @@ other threads:
     about to run method get_left_test with argument 1
   T5: pc=1811 runnable get_right_test(1)
     about to run method get_right_test with argument 1
+  T6: pc=1859 runnable peek_right_test(1)
+    about to run method peek_right_test with argument 1
 shared variables:
   alloc$next: 0
   alloc$pool: {:}
-  d: { "count": 1, "data": [ None, [ 2, "rights" ] ], "head": 0, "lock": False, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 1 }
-state id: 13354
+  d: { "count": 1, "data": [ None, [ 2, "rights" ] ], "head": 0, "lock": False, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 }
+state id: 13646
 ================================================
 
 Step 357:
-  program counter:   1859
-  hvm code:          Frame peek_right_test(self)
-  explanation:       pop argument (1), assign to self, and run method "peek_right_test"
-  start statement:   line=37 column=1
-  end statement:     line=37 column=26
-  source code:       def peek_right_test(self):
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  program counter:   1729
+  hvm code:          Frame put_left_test(self)
+  explanation:       pop argument (1), assign to self, and run method "put_left_test"
+  start statement:   line=12 column=1
+  end statement:     line=12 column=24
+  source code:       def put_left_test(self):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
   method variables:  { self: 1 }
-  call trace:        peek_right_test(1)
+  call trace:        put_left_test(1)
   stack:             [{:}]
 
 Step 358:
-  program counter:   1860
+  program counter:   1730
   hvm code:          Push ()
   explanation:       building a tuple: push constant ()
-  start statement:   line=38 column=5
-  end statement:     line=38 column=34
-  source code:       print("call peek right", self)
-                           ^^^^^^^^^^^^^^^^^^^^^^^
+  start statement:   line=13 column=5
+  end statement:     line=13 column=32
+  source code:       print("call left put", self)
+                           ^^^^^^^^^^^^^^^^^^^^^
   stack:             [{:}, []]
 
 Step 359:
-  program counter:   1861
-  hvm code:          Push "call peek right"
-  explanation:       push constant "call peek right"
-  source code:       print("call peek right", self)
-                           ^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [], "call peek right"]
+  program counter:   1731
+  hvm code:          Push "call left put"
+  explanation:       push constant "call left put"
+  source code:       print("call left put", self)
+                           ^^^^^^^^^^^^^^^
+  stack:             [{:}, [], "call left put"]
 
 Step 360:
-  program counter:   1862
+  program counter:   1732
   hvm code:          2-ary ListAdd
-  explanation:       pop 2 values ("call peek right", []); insert first value into the second; push result (["call peek right"])
-  source code:       print("call peek right", self)
-                           ^^^^^^^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [ "call peek right" ]]
+  explanation:       pop 2 values ("call left put", []); insert first value into the second; push result (["call left put"])
+  source code:       print("call left put", self)
+                           ^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [ "call left put" ]]
 
 Step 361:
-  program counter:   1863
+  program counter:   1733
   hvm code:          LoadVar self
   explanation:       push value (1) of variable "self"
-  source code:       print("call peek right", self)
-                                              ^^^^
-  stack:             [{:}, [ "call peek right" ], 1]
+  source code:       print("call left put", self)
+                                            ^^^^
+  stack:             [{:}, [ "call left put" ], 1]
 
 Step 362:
-  program counter:   1864
+  program counter:   1734
   hvm code:          2-ary ListAdd
-  explanation:       pop 2 values (1, ["call peek right"]); insert first value into the second; push result (["call peek right", 1])
-  source code:       print("call peek right", self)
-                           ^^^^^^^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [ "call peek right", 1 ]]
+  explanation:       pop 2 values (1, ["call left put"]); insert first value into the second; push result (["call left put", 1])
+  source code:       print("call left put", self)
+                           ^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [ "call left put", 1 ]]
 
 Step 363:
-  program counter:   1865
+  program counter:   1735
   hvm code:          Print
-  explanation:       pop value (["call peek right", 1]) and add to print log
-  source code:       print("call peek right", self)
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  call trace:        peek_right_test(1)
+  explanation:       pop value (["call left put", 1]) and add to print log
+  source code:       print("call left put", self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  call trace:        put_left_test(1)
   stack:             [{:}]
 
 Step 364:
-  program counter:   1866
-  hvm code:          Push PC(1673)
-  explanation:       push program counter constant 1673 ()
-  start statement:   line=39 column=5
-  end statement:     line=39 column=33
-  source code:       let v = bdeque.peek_right(?d):
-                             ^^^^^^^^^^^^^^^^^
-  stack:             [{:}, PC(1673)]
+  program counter:   1736
+  hvm code:          Push PC(1290)
+  explanation:       push program counter constant 1290 ()
+  start statement:   line=14 column=5
+  end statement:     line=14 column=39
+  source code:       bdeque.put_left(?d, (self, "left"))
+                     ^^^^^^^^^^^^^^^
+  stack:             [{:}, PC(1290)]
 
 Step 365:
-  program counter:   1867
-  hvm code:          Push ?d
-  explanation:       push constant ?d
-  source code:       let v = bdeque.peek_right(?d):
-                                                ^
-  stack:             [{:}, PC(1673), ?d]
+  program counter:   1737
+  hvm code:          Push ()
+  explanation:       building a tuple: push constant ()
+  source code:       bdeque.put_left(?d, (self, "left"))
+                                     ^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, PC(1290), []]
 
 Step 366:
-  program counter:   1868
-  hvm code:          2-ary Closure
-  explanation:       pop 2 values (?d, PC(1673)); push result (?PC(1673)[?d])
-  source code:       let v = bdeque.peek_right(?d):
-                             ^^^^^^^^^^^^^^^^^^^^^
-  stack:             [{:}, ?PC(1673)[?d]]
+  program counter:   1738
+  hvm code:          Push ?d
+  explanation:       push constant ?d
+  source code:       bdeque.put_left(?d, (self, "left"))
+                                      ^
+  stack:             [{:}, PC(1290), [], ?d]
 
 Step 367:
-  program counter:   1869
-  hvm code:          Load
-  explanation:       pop an argument (?d) and call method (1673: "peek_right")
-  start expression:  line=39 column=13
-  end expression:    line=39 column=33
-  call trace:        peek_right_test(1) --> peek_right(?d)
-  stack:             [{:}, [], 29906, ?d]
+  program counter:   1739
+  hvm code:          2-ary ListAdd
+  explanation:       pop 2 values (?d, []); insert first value into the second; push result ([?d])
+  source code:       bdeque.put_left(?d, (self, "left"))
+                                     ^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, PC(1290), [ ?d ]]
 
 Step 368:
-  program counter:   1673
-  hvm code:          Frame peek_right(d)
-  explanation:       pop argument (?d), assign to d, and run method "peek_right"
-  module:            bdeque
-  start statement:   line=97 column=1
-  end statement:     line=97 column=32
-  source code:       def peek_right(d) returns right: 
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  method variables:  { d: ?d }
-  stack:             [{:}, [], 29906, { "self": 1 }]
+  program counter:   1740
+  hvm code:          Push ()
+  explanation:       building a tuple: push constant ()
+  source code:       bdeque.put_left(?d, (self, "left"))
+                                          ^^^^^^^^^^^^
+  stack:             [{:}, PC(1290), [ ?d ], []]
 
 Step 369:
-  program counter:   1674
-  hvm code:          LoadVar d
-  explanation:       push value (?d) of variable "d"
-  start statement:   line=103 column=5
-  end statement:     line=103 column=21
-  source code:       acquire(?d->lock)
-                              ^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d]
+  program counter:   1741
+  hvm code:          LoadVar self
+  explanation:       push value (1) of variable "self"
+  source code:       bdeque.put_left(?d, (self, "left"))
+                                          ^^^^
+  stack:             [{:}, PC(1290), [ ?d ], [], 1]
 
 Step 370:
-  program counter:   1675
+  program counter:   1742
+  hvm code:          2-ary ListAdd
+  explanation:       pop 2 values (1, []); insert first value into the second; push result ([1])
+  source code:       bdeque.put_left(?d, (self, "left"))
+                                          ^^^^^^^^^^^^
+  stack:             [{:}, PC(1290), [ ?d ], [ 1 ]]
+
+Step 371:
+  program counter:   1743
+  hvm code:          Push "left"
+  explanation:       push constant "left"
+  source code:       bdeque.put_left(?d, (self, "left"))
+                                                ^^^^^^
+  stack:             [{:}, PC(1290), [ ?d ], [ 1 ], "left"]
+
+Step 372:
+  program counter:   1744
+  hvm code:          2-ary ListAdd
+  explanation:       pop 2 values ("left", [1]); insert first value into the second; push result ([1, "left"])
+  source code:       bdeque.put_left(?d, (self, "left"))
+                                          ^^^^^^^^^^^^
+  stack:             [{:}, PC(1290), [ ?d ], [ 1, "left" ]]
+
+Step 373:
+  program counter:   1745
+  hvm code:          2-ary ListAdd
+  explanation:       pop 2 values ([1, "left"], [?d]); insert first value into the second; push result ([?d, [1, "left"]])
+  source code:       bdeque.put_left(?d, (self, "left"))
+                                     ^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, PC(1290), [ ?d, [ 1, "left" ] ]]
+
+Step 374:
+  program counter:   1746
+  hvm code:          2-ary Closure
+  explanation:       pop 2 values ([?d, [1, "left"]], PC(1290)); push result (?PC(1290)[[?d, [1, "left"]]])
+  source code:       bdeque.put_left(?d, (self, "left"))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, ?PC(1290)[[ ?d, [ 1, "left" ] ]]]
+
+Step 375:
+  program counter:   1747
+  hvm code:          Load
+  explanation:       pop an argument ([?d, [1, "left"]]) and call method (1290: "put_left")
+  start expression:  line=14 column=5
+  end expression:    line=14 column=39
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, [ ?d, [ 1, "left" ] ]]
+
+Step 376:
+  program counter:   1290
+  hvm code:          Frame put_left(d, v)
+  explanation:       pop argument ([?d, [1, "left"]]), assign to (d, v), and run method "put_left"
+  module:            bdeque
+  start statement:   line=17 column=1
+  end statement:     line=17 column=19
+  source code:       def put_left(d, v):
+                     ^^^^^^^^^^^^^^^^^^^
+  method variables:  { d: ?d, v: [ 1, "left" ] }
+  stack:             [{:}, [], 27954, { "self": 1 }]
+
+Step 377:
+  program counter:   1291
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=23 column=5
+  end statement:     line=23 column=21
+  source code:       acquire(?d->lock)
+                              ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d]
+
+Step 378:
+  program counter:   1292
   hvm code:          Push "lock"
   explanation:       push constant "lock"
   source code:       acquire(?d->lock)
                                  ^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d, "lock"]
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d, "lock"]
 
-Step 371:
-  program counter:   1676
+Step 379:
+  program counter:   1293
   hvm code:          2-ary AddArg
   explanation:       pop 2 values ("lock", ?d); push result (?d["lock"])
   source code:       acquire(?d->lock)
                               ^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["lock"]]
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["lock"]]
 
-Step 372:
-  program counter:   1677
+Step 380:
+  program counter:   1294
   hvm code:          Apply PC(954)
   explanation:       pop an argument (?d["lock"]) and call method (954: "acquire")
   source code:       acquire(?d->lock)
                      ^^^^^^^^^^^^^^^^^
-  call trace:        peek_right_test(1) --> peek_right(?d) --> acquire(?d["lock"])
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 26834, ?d["lock"]]
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"]) --> acquire(?d["lock"])
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 20706, ?d["lock"]]
 
-Step 373:
+Step 381:
   program counter:   954
   hvm code:          Frame acquire(binsema)
   explanation:       pop argument (?d["lock"]), assign to binsema, and run method "acquire"
@@ -3302,24 +3367,24 @@ Step 373:
   source code:       def acquire(binsema):
                      ^^^^^^^^^^^^^^^^^^^^^
   method variables:  { binsema: ?d["lock"] }
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 26834, { "d": ?d }]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 20706, { "d": ?d, "v": [ 1, "left" ] }]
 
-Step 374:
+Step 382:
   program counter:   955
   hvm code:          AtomicInc(eager)
   explanation:       increment atomic counter from 0 to 1: becomes atomic
   start statement:   line=35 column=16
   end statement:     line=37 column=6
   source code:       atomically when not !binsema:
-  call trace:        peek_right_test(1) --> peek_right(?d) --> acquire(?d["lock"])
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"]) --> acquire(?d["lock"])
 
-Step 375:
+Step 383:
   program counter:   956
   hvm code:          ReadonlyInc
   explanation:       increment readonly counter from 0 to 1: becomes readonly
   source code:       atomically when not !binsema:
 
-Step 376:
+Step 384:
   program counter:   957
   hvm code:          LoadVar binsema
   explanation:       push value (?d["lock"]) of variable "binsema"
@@ -3327,47 +3392,47 @@ Step 376:
   end statement:     line=35 column=32
   source code:       atomically when not !binsema:
                                           ^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 26834, { "d": ?d }, ?d["lock"]]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 20706, { "d": ?d, "v": [ 1, "left" ] }, ?d["lock"]]
 
-Step 377:
+Step 385:
   program counter:   958
   hvm code:          Load
   explanation:       pop address (?d["lock"]) and push value (False)
   source code:       atomically when not !binsema:
                                          ^^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 26834, { "d": ?d }, False]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 20706, { "d": ?d, "v": [ 1, "left" ] }, False]
 
-Step 378:
+Step 386:
   program counter:   959
   hvm code:          1-ary not
   explanation:       pop a value (False); logical not; push result (True)
   source code:       atomically when not !binsema:
                                      ^^^^^^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 26834, { "d": ?d }, True]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 20706, { "d": ?d, "v": [ 1, "left" ] }, True]
 
-Step 379:
+Step 387:
   program counter:   960
   hvm code:          JumpCond False 962
   explanation:       pop value (True), compare to False, and jump to 962 if the same
   source code:       atomically when not !binsema:
                                 ^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 26834, { "d": ?d }]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 20706, { "d": ?d, "v": [ 1, "left" ] }]
 
-Step 380:
+Step 388:
   program counter:   961
   hvm code:          Jump 965
   explanation:       set program counter to 965
   source code:       atomically when not !binsema:
                                                 ^
 
-Step 381:
+Step 389:
   program counter:   965
   hvm code:          ReadonlyDec
   explanation:       decrement readonly counter from 1 to 0: no longer readonly
   source code:       atomically when not !binsema:
                                 ^^^^^^^^^^^^^^^^^
 
-Step 382:
+Step 390:
   program counter:   966
   hvm code:          LoadVar binsema
   explanation:       push value (?d["lock"]) of variable "binsema"
@@ -3375,9 +3440,9 @@ Step 382:
   end statement:     line=36 column=23
   source code:       !binsema = True
                       ^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 26834, { "d": ?d }, ?d["lock"]]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 20706, { "d": ?d, "v": [ 1, "left" ] }, ?d["lock"]]
 
-Step 383:
+Step 391:
   program counter:   967
   hvm code:          DelVar binsema
   explanation:       delete method variable binsema
@@ -3385,24 +3450,24 @@ Step 383:
   end expression:    line=36 column=16
   method variables:  { }
 
-Step 384:
+Step 392:
   program counter:   968
   hvm code:          Push True
   explanation:       push constant True
   source code:       !binsema = True
                                 ^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 26834, { "d": ?d }, ?d["lock"], True]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 20706, { "d": ?d, "v": [ 1, "left" ] }, ?d["lock"], True]
 
-Step 385:
+Step 393:
   program counter:   969
   hvm code:          Store
   explanation:       pop value (True) and address (?d["lock"]) and store
   source code:       !binsema = True
                      ^^^^^^^^^^
-  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 1, "data": [ None, [ 2, "rights" ] ], "head": 0, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 1 } }
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 26834, { "d": ?d }]
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 1, "data": [ None, [ 2, "rights" ] ], "head": 0, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 } }
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 20706, { "d": ?d, "v": [ 1, "left" ] }]
 
-Step 386:
+Step 394:
   program counter:   970
   hvm code:          AtomicDec
   explanation:       decrement atomic counter from 1 to 0: no longer atomic
@@ -3411,7 +3476,7 @@ Step 386:
   source code:       atomically when not !binsema:
                                 ^^^^^^^^^^^^^^^^^
 
-Step 387:
+Step 395:
   program counter:   971
   hvm code:          ReturnOp(result. None)
   explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
@@ -3419,266 +3484,496 @@ Step 387:
   end statement:     line=34 column=21
   source code:       def acquire(binsema):
                      ^^^^^^^^^^^^^^^^^^^^^
-  method variables:  { d: ?d }
-  call trace:        peek_right_test(1) --> peek_right(?d)
-  stack:             [{:}, [], 29906, { "self": 1 }, None]
+  method variables:  { d: ?d, v: [ 1, "left" ] }
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }, None]
 
-Step 388:
-  program counter:   1678
+Step 396:
+  program counter:   1295
   hvm code:          Pop
   explanation:       pop and discard value ()
   module:            bdeque
-  start statement:   line=103 column=5
-  end statement:     line=103 column=21
+  start statement:   line=23 column=5
+  end statement:     line=23 column=21
   source code:       acquire(?d->lock)
                      ^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }]
-
-Step 389:
-  program counter:   1679
-  hvm code:          LoadVar d
-  explanation:       push value (?d) of variable "d"
-  start statement:   line=104 column=5
-  end statement:     line=104 column=24
-  source code:       while d->count == 0:
-                           ^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d]
-
-Step 390:
-  program counter:   1680
-  hvm code:          Push "count"
-  explanation:       push constant "count"
-  source code:       while d->count == 0:
-                              ^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d, "count"]
-
-Step 391:
-  program counter:   1681
-  hvm code:          2-ary AddArg
-  explanation:       pop 2 values ("count", ?d); push result (?d["count"])
-  source code:       while d->count == 0:
-                           ^^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["count"]]
-
-Step 392:
-  program counter:   1682
-  hvm code:          Load
-  explanation:       pop address (?d["count"]) and push value (1)
-  start expression:  line=104 column=11
-  end expression:    line=104 column=18
-  call trace:        peek_right_test(1) --> peek_right(?d)
-  stack:             [{:}, [], 29906, { "self": 1 }, 1]
-
-Step 393:
-  program counter:   1683
-  hvm code:          Push 0
-  explanation:       push constant 0
-  source code:       while d->count == 0:
-                                       ^
-  stack:             [{:}, [], 29906, { "self": 1 }, 1, 0]
-
-Step 394:
-  program counter:   1684
-  hvm code:          2-ary ==
-  explanation:       pop 2 values (0, 1); check if both values are the same; push result (False)
-  source code:       while d->count == 0:
-                           ^^^^^^^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, False]
-
-Step 395:
-  program counter:   1685
-  hvm code:          JumpCond False 1698
-  explanation:       pop value (False), compare to False, and jump to 1698 if the same
-  source code:       while d->count == 0:
-                     ^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }]
-
-Step 396:
-  program counter:   1698
-  hvm code:          LoadVar d
-  explanation:       push value (?d) of variable "d"
-  start statement:   line=106 column=5
-  end statement:     line=106 column=44
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                             ^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d]
+  stack:             [{:}, [], 27954, { "self": 1 }]
 
 Step 397:
-  program counter:   1699
-  hvm code:          Push "data"
-  explanation:       push constant "data"
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                                ^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d, "data"]
+  program counter:   1296
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=24 column=5
+  end statement:     line=24 column=30
+  source code:       while d->count == d->size:
+                           ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d]
 
 Step 398:
-  program counter:   1700
-  hvm code:          2-ary AddArg
-  explanation:       pop 2 values ("data", ?d); push result (?d["data"])
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                             ^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"]]
+  program counter:   1297
+  hvm code:          Push "count"
+  explanation:       push constant "count"
+  source code:       while d->count == d->size:
+                              ^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d, "count"]
 
 Step 399:
-  program counter:   1701
-  hvm code:          LoadVar d
-  explanation:       push value (?d) of variable "d"
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                                      ^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"], ?d]
+  program counter:   1298
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("count", ?d); push result (?d["count"])
+  source code:       while d->count == d->size:
+                           ^^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["count"]]
 
 Step 400:
-  program counter:   1702
-  hvm code:          Push "tail"
-  explanation:       push constant "tail"
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                                         ^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"], ?d, "tail"]
+  program counter:   1299
+  hvm code:          Load
+  explanation:       pop address (?d["count"]) and push value (1)
+  start expression:  line=24 column=11
+  end expression:    line=24 column=18
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }, 1]
 
 Step 401:
-  program counter:   1703
-  hvm code:          2-ary AddArg
-  explanation:       pop 2 values ("tail", ?d); push result (?d["tail"])
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                                      ^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"], ?d["tail"]]
+  program counter:   1300
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  source code:       while d->count == d->size:
+                                       ^
+  stack:             [{:}, [], 27954, { "self": 1 }, 1, ?d]
 
 Step 402:
-  program counter:   1704
-  hvm code:          Load
-  explanation:       pop address (?d["tail"]) and push value (1)
-  start expression:  line=106 column=22
-  end expression:    line=106 column=28
-  call trace:        peek_right_test(1) --> peek_right(?d)
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"], 1]
-
-Step 403:
-  program counter:   1705
-  hvm code:          Push 1
-  explanation:       push constant 1
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                                                ^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"], 1, 1]
-
-Step 404:
-  program counter:   1706
-  hvm code:          2-ary -
-  explanation:       pop 2 values (1, 1); the second integer minus the first; push result (0)
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                                      ^^^^^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"], 0]
-
-Step 405:
-  program counter:   1707
-  hvm code:          LoadVar d
-  explanation:       push value (?d) of variable "d"
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                                                     ^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"], 0, ?d]
-
-Step 406:
-  program counter:   1708
+  program counter:   1301
   hvm code:          Push "size"
   explanation:       push constant "size"
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                                                        ^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"], 0, ?d, "size"]
+  source code:       while d->count == d->size:
+                                          ^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, 1, ?d, "size"]
 
-Step 407:
-  program counter:   1709
+Step 403:
+  program counter:   1302
   hvm code:          2-ary AddArg
   explanation:       pop 2 values ("size", ?d); push result (?d["size"])
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                                                     ^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"], 0, ?d["size"]]
+  source code:       while d->count == d->size:
+                                       ^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, 1, ?d["size"]]
 
-Step 408:
-  program counter:   1710
+Step 404:
+  program counter:   1303
   hvm code:          Load
   explanation:       pop address (?d["size"]) and push value (2)
-  start expression:  line=106 column=37
-  end expression:    line=106 column=43
-  call trace:        peek_right_test(1) --> peek_right(?d)
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"], 0, 2]
+  start expression:  line=24 column=23
+  end expression:    line=24 column=29
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }, 1, 2]
 
-Step 409:
-  program counter:   1711
-  hvm code:          2-ary %
-  explanation:       pop 2 values (2, 0); second value modulo the first; push result (0)
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                                     ^^^^^^^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"], 0]
+Step 405:
+  program counter:   1304
+  hvm code:          2-ary ==
+  explanation:       pop 2 values (2, 1); check if both values are the same; push result (False)
+  source code:       while d->count == d->size:
+                           ^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, False]
 
-Step 410:
-  program counter:   1712
-  hvm code:          2-ary AddArg
-  explanation:       pop 2 values (0, ?d["data"]); push result (?d["data"][0])
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["data"][0]]
+Step 406:
+  program counter:   1305
+  hvm code:          JumpCond False 1318
+  explanation:       pop value (False), compare to False, and jump to 1318 if the same
+  source code:       while d->count == d->size:
+                     ^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }]
 
-Step 411:
-  program counter:   1713
-  hvm code:          Load
-  explanation:       pop address (?d["data"][0]) and push value (None)
-  start expression:  line=106 column=13
-  end expression:    line=106 column=44
-  call trace:        peek_right_test(1) --> peek_right(?d)
-  stack:             [{:}, [], 29906, { "self": 1 }, None]
-
-Step 412:
-  program counter:   1714
-  hvm code:          StoreVar right
-  explanation:       pop value (None) and store locally in variable \"right\"
-  source code:       right = d->data[(d->tail - 1) % d->size]
-                     ^^^^^^^
-  method variables:  { d: ?d, right: None }
-  stack:             [{:}, [], 29906, { "self": 1 }]
-
-Step 413:
-  program counter:   1715
+Step 407:
+  program counter:   1318
   hvm code:          LoadVar d
   explanation:       push value (?d) of variable "d"
-  start statement:   line=107 column=5
-  end statement:     line=107 column=21
-  source code:       release(?d->lock)
-                              ^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d]
+  start statement:   line=26 column=5
+  end statement:     line=26 column=24
+  source code:       d->data[d->head] = v 
+                     ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d]
+
+Step 408:
+  program counter:   1319
+  hvm code:          Push "data"
+  explanation:       push constant "data"
+  source code:       d->data[d->head] = v 
+                        ^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d, "data"]
+
+Step 409:
+  program counter:   1320
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("data", ?d); push result (?d["data"])
+  source code:       d->data[d->head] = v 
+                     ^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["data"]]
+
+Step 410:
+  program counter:   1321
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  source code:       d->data[d->head] = v 
+                             ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["data"], ?d]
+
+Step 411:
+  program counter:   1322
+  hvm code:          Push "head"
+  explanation:       push constant "head"
+  source code:       d->data[d->head] = v 
+                                ^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["data"], ?d, "head"]
+
+Step 412:
+  program counter:   1323
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("head", ?d); push result (?d["head"])
+  source code:       d->data[d->head] = v 
+                             ^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["data"], ?d["head"]]
+
+Step 413:
+  program counter:   1324
+  hvm code:          Load
+  explanation:       pop address (?d["head"]) and push value (0)
+  start expression:  line=26 column=13
+  end expression:    line=26 column=19
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["data"], 0]
 
 Step 414:
-  program counter:   1716
-  hvm code:          DelVar d
-  explanation:       delete method variable d
-  start expression:  line=107 column=14
-  end expression:    line=107 column=14
-  method variables:  { right: None }
+  program counter:   1325
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values (0, ?d["data"]); push result (?d["data"][0])
+  source code:       d->data[d->head] = v 
+                     ^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["data"][0]]
 
 Step 415:
-  program counter:   1717
+  program counter:   1326
+  hvm code:          LoadVar v
+  explanation:       push value ([1, "left"]) of variable "v"
+  source code:       d->data[d->head] = v 
+                                        ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["data"][0], [ 1, "left" ]]
+
+Step 416:
+  program counter:   1327
+  hvm code:          DelVar v
+  explanation:       delete method variable v
+  start expression:  line=26 column=24
+  end expression:    line=26 column=24
+  method variables:  { d: ?d }
+
+Step 417:
+  program counter:   1328
+  hvm code:          Store
+  explanation:       pop value ([1, "left"]) and address (?d["data"][0]) and store
+  source code:       d->data[d->head] = v 
+                     ^^^^^^^^^^^^^^^^^^
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 1, "data": [ [ 1, "left" ], [ 2, "rights" ] ], "head": 0, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 } }
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }]
+
+Step 418:
+  program counter:   1329
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=27 column=5
+  end statement:     line=27 column=37
+  source code:       d->head = (d->head - 1) % d->size
+                     ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d]
+
+Step 419:
+  program counter:   1330
+  hvm code:          Push "head"
+  explanation:       push constant "head"
+  source code:       d->head = (d->head - 1) % d->size
+                        ^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d, "head"]
+
+Step 420:
+  program counter:   1331
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("head", ?d); push result (?d["head"])
+  source code:       d->head = (d->head - 1) % d->size
+                     ^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"]]
+
+Step 421:
+  program counter:   1332
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  source code:       d->head = (d->head - 1) % d->size
+                                ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"], ?d]
+
+Step 422:
+  program counter:   1333
+  hvm code:          Push "head"
+  explanation:       push constant "head"
+  source code:       d->head = (d->head - 1) % d->size
+                                   ^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"], ?d, "head"]
+
+Step 423:
+  program counter:   1334
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("head", ?d); push result (?d["head"])
+  source code:       d->head = (d->head - 1) % d->size
+                                ^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"], ?d["head"]]
+
+Step 424:
+  program counter:   1335
+  hvm code:          Load
+  explanation:       pop address (?d["head"]) and push value (0)
+  start expression:  line=27 column=16
+  end expression:    line=27 column=22
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"], 0]
+
+Step 425:
+  program counter:   1336
+  hvm code:          Push 1
+  explanation:       push constant 1
+  source code:       d->head = (d->head - 1) % d->size
+                                          ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"], 0, 1]
+
+Step 426:
+  program counter:   1337
+  hvm code:          2-ary -
+  explanation:       pop 2 values (1, 0); the second integer minus the first; push result (-1)
+  source code:       d->head = (d->head - 1) % d->size
+                                ^^^^^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"], -1]
+
+Step 427:
+  program counter:   1338
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  source code:       d->head = (d->head - 1) % d->size
+                                               ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"], -1, ?d]
+
+Step 428:
+  program counter:   1339
+  hvm code:          Push "size"
+  explanation:       push constant "size"
+  source code:       d->head = (d->head - 1) % d->size
+                                                  ^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"], -1, ?d, "size"]
+
+Step 429:
+  program counter:   1340
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("size", ?d); push result (?d["size"])
+  source code:       d->head = (d->head - 1) % d->size
+                                               ^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"], -1, ?d["size"]]
+
+Step 430:
+  program counter:   1341
+  hvm code:          Load
+  explanation:       pop address (?d["size"]) and push value (2)
+  start expression:  line=27 column=31
+  end expression:    line=27 column=37
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"], -1, 2]
+
+Step 431:
+  program counter:   1342
+  hvm code:          2-ary %
+  explanation:       pop 2 values (2, -1); second value modulo the first; push result (1)
+  source code:       d->head = (d->head - 1) % d->size
+                               ^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["head"], 1]
+
+Step 432:
+  program counter:   1343
+  hvm code:          Store
+  explanation:       pop value (1) and address (?d["head"]) and store
+  source code:       d->head = (d->head - 1) % d->size
+                     ^^^^^^^^^
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 1, "data": [ [ 1, "left" ], [ 2, "rights" ] ], "head": 1, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 } }
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }]
+
+Step 433:
+  program counter:   1344
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=28 column=5
+  end statement:     line=28 column=17
+  source code:       d->count += 1
+                     ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d]
+
+Step 434:
+  program counter:   1345
+  hvm code:          Push "count"
+  explanation:       push constant "count"
+  source code:       d->count += 1
+                        ^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d, "count"]
+
+Step 435:
+  program counter:   1346
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("count", ?d); push result (?d["count"])
+  source code:       d->count += 1
+                     ^^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["count"]]
+
+Step 436:
+  program counter:   1347
+  hvm code:          Dup
+  explanation:       push a copy of the top value on the stack
+  source code:       d->count += 1
+                     ^^^^^^^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["count"], ?d["count"]]
+
+Step 437:
+  program counter:   1348
+  hvm code:          Load
+  explanation:       pop address (?d["count"]) and push value (1)
+  start expression:  line=28 column=5
+  end expression:    line=28 column=17
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["count"], 1]
+
+Step 438:
+  program counter:   1349
+  hvm code:          Push 1
+  explanation:       push constant 1
+  source code:       d->count += 1
+                                 ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["count"], 1, 1]
+
+Step 439:
+  program counter:   1350
+  hvm code:          2-ary +
+  explanation:       pop 2 values (1, 1); add the integers; push result (2)
+  source code:       d->count += 1
+                     ^^^^^^^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["count"], 2]
+
+Step 440:
+  program counter:   1351
+  hvm code:          Store
+  explanation:       pop value (2) and address (?d["count"]) and store
+  source code:       d->count += 1
+                     ^^^^^^^^^^^
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 2, "data": [ [ 1, "left" ], [ 2, "rights" ] ], "head": 1, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 } }
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }]
+
+Step 441:
+  program counter:   1352
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=30 column=5
+  end statement:     line=30 column=21
+  source code:       if d->count == 1:
+                        ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d]
+
+Step 442:
+  program counter:   1353
+  hvm code:          Push "count"
+  explanation:       push constant "count"
+  source code:       if d->count == 1:
+                           ^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d, "count"]
+
+Step 443:
+  program counter:   1354
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("count", ?d); push result (?d["count"])
+  source code:       if d->count == 1:
+                        ^^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["count"]]
+
+Step 444:
+  program counter:   1355
+  hvm code:          Load
+  explanation:       pop address (?d["count"]) and push value (2)
+  start expression:  line=30 column=8
+  end expression:    line=30 column=15
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }, 2]
+
+Step 445:
+  program counter:   1356
+  hvm code:          Push 1
+  explanation:       push constant 1
+  source code:       if d->count == 1:
+                                    ^
+  stack:             [{:}, [], 27954, { "self": 1 }, 2, 1]
+
+Step 446:
+  program counter:   1357
+  hvm code:          2-ary ==
+  explanation:       pop 2 values (1, 2); check if both values are the same; push result (False)
+  source code:       if d->count == 1:
+                        ^^^^^^^^^^^^^
+  stack:             [{:}, [], 27954, { "self": 1 }, False]
+
+Step 447:
+  program counter:   1358
+  hvm code:          JumpCond False 1364
+  explanation:       pop value (False), compare to False, and jump to 1364 if the same
+  source code:       if d->count == 1:
+                     ^^
+  stack:             [{:}, [], 27954, { "self": 1 }]
+
+Step 448:
+  program counter:   1364
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=32 column=5
+  end statement:     line=32 column=21
+  source code:       release(?d->lock)
+                              ^
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d]
+
+Step 449:
+  program counter:   1365
+  hvm code:          DelVar d
+  explanation:       delete method variable d
+  start expression:  line=32 column=14
+  end expression:    line=32 column=14
+  method variables:  { }
+
+Step 450:
+  program counter:   1366
   hvm code:          Push "lock"
   explanation:       push constant "lock"
   source code:       release(?d->lock)
                                  ^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d, "lock"]
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d, "lock"]
 
-Step 416:
-  program counter:   1718
+Step 451:
+  program counter:   1367
   hvm code:          2-ary AddArg
   explanation:       pop 2 values ("lock", ?d); push result (?d["lock"])
   source code:       release(?d->lock)
                               ^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, ?d["lock"]]
+  stack:             [{:}, [], 27954, { "self": 1 }, ?d["lock"]]
 
-Step 417:
-  program counter:   1719
+Step 452:
+  program counter:   1368
   hvm code:          Apply PC(973)
   explanation:       pop an argument (?d["lock"]) and call method (973: "release")
   source code:       release(?d->lock)
                      ^^^^^^^^^^^^^^^^^
-  call trace:        peek_right_test(1) --> peek_right(?d) --> release(?d["lock"])
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 27506, ?d["lock"]]
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"]) --> release(?d["lock"])
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 21890, ?d["lock"]]
 
-Step 418:
+Step 453:
   program counter:   973
   hvm code:          Frame release(binsema)
   explanation:       pop argument (?d["lock"]), assign to binsema, and run method "release"
@@ -3688,19 +3983,90 @@ Step 418:
   source code:       def release(binsema):
                      ^^^^^^^^^^^^^^^^^^^^^
   method variables:  { binsema: ?d["lock"] }
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 27506, { "right": None }]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 21890, {:}]
 
-Step 419:
+================================================
+Running thread T3: put_right_test(2)
+mode:  runnable
+stack: ['{:}', '[ "done right put", 2 ]']
+other threads:
+  T0: pc=1966 terminated atomic __init__()
+  T1: pc=974 runnable put_left_test(1) --> put_left(?d, [1, "left"]) --> release(?d["lock"])
+    about to execute synch:39:     atomically:
+  T2: pc=1758 runnable put_right_test(1)
+    about to run method put_right_test with argument 1
+  T4: pc=1787 runnable get_left_test(1)
+    about to run method get_left_test with argument 1
+  T5: pc=1811 runnable get_right_test(1)
+    about to run method get_right_test with argument 1
+  T6: pc=1859 runnable peek_right_test(1)
+    about to run method peek_right_test with argument 1
+shared variables:
+  alloc$next: 0
+  alloc$pool: {:}
+  d: { "count": 2, "data": [ [ 1, "left" ], [ 2, "rights" ] ], "head": 1, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 }
+state id: 61863
+================================================
+
+Step 454:
+  program counter:   1784
+  hvm code:          Print
+  explanation:       pop value (["done right put", 2]) and add to print log
+  module:            __main__
+  start statement:   line=20 column=5
+  end statement:     line=20 column=33
+  source code:       print("done right put", self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  call trace:        put_right_test(2)
+  stack:             [{:}]
+
+Step 455:
+  program counter:   1785
+  hvm code:          ReturnOp(result. None)
+  explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
+  start statement:   line=17 column=1
+  end statement:     line=17 column=25
+  source code:       def put_right_test(self):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  new mode:          terminated
+  stack:             [None]
+
+================================================
+Running thread T1: put_left_test(1) --> put_left(?d, [1, "left"]) --> release(?d["lock"])
+method variables:
+  binsema: ?d["lock"]
+mode:  runnable
+stack: ['{:}', '[]', '27954', '{ "self": 1 }', '[]', '21890', '{:}']
+other threads:
+  T0: pc=1966 terminated atomic __init__()
+  T2: pc=1758 runnable put_right_test(1)
+    about to run method put_right_test with argument 1
+  T3: pc=1785 terminated put_right_test(2)
+  T4: pc=1787 runnable get_left_test(1)
+    about to run method get_left_test with argument 1
+  T5: pc=1811 runnable get_right_test(1)
+    about to run method get_right_test with argument 1
+  T6: pc=1859 runnable peek_right_test(1)
+    about to run method peek_right_test with argument 1
+shared variables:
+  alloc$next: 0
+  alloc$pool: {:}
+  d: { "count": 2, "data": [ [ 1, "left" ], [ 2, "rights" ] ], "head": 1, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 }
+state id: 69871
+================================================
+
+Step 456:
   program counter:   974
   hvm code:          AtomicInc(eager)
   explanation:       increment atomic counter from 0 to 1: becomes atomic
+  module:            synch
   start statement:   line=39 column=5
   end statement:     line=39 column=15
   source code:       atomically:
                      ^^^^^^^^^^^
-  call trace:        peek_right_test(1) --> peek_right(?d) --> release(?d["lock"])
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"]) --> release(?d["lock"])
 
-Step 420:
+Step 457:
   program counter:   975
   hvm code:          AtomicInc(lazy)
   explanation:       increment atomic counter from 1 to 2: remains atomic
@@ -3709,52 +4075,52 @@ Step 420:
   source code:       assert !binsema
                      ^^^^^^^^^^^^^^^
 
-Step 421:
+Step 458:
   program counter:   976
   hvm code:          ReadonlyInc
   explanation:       increment readonly counter from 0 to 1: becomes readonly
   start expression:  line=40 column=9
   end expression:    line=40 column=23
 
-Step 422:
+Step 459:
   program counter:   977
   hvm code:          LoadVar binsema
   explanation:       push value (?d["lock"]) of variable "binsema"
   source code:       assert !binsema
                              ^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 27506, { "right": None }, ?d["lock"]]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 21890, {:}, ?d["lock"]]
 
-Step 423:
+Step 460:
   program counter:   978
   hvm code:          Load
   explanation:       pop address (?d["lock"]) and push value (True)
   source code:       assert !binsema
                             ^^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 27506, { "right": None }, True]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 21890, {:}, True]
 
-Step 424:
+Step 461:
   program counter:   979
   hvm code:          Assert
   explanation:       pop a value (True); do not raise exception
   source code:       assert !binsema
                      ^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 27506, { "right": None }]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 21890, {:}]
 
-Step 425:
+Step 462:
   program counter:   980
   hvm code:          ReadonlyDec
   explanation:       decrement readonly counter from 1 to 0: no longer readonly
   source code:       assert !binsema
                      ^^^^^^^^^^^^^^^
 
-Step 426:
+Step 463:
   program counter:   981
   hvm code:          AtomicDec
   explanation:       decrement atomic counter from 2 to 1: remains atomic
   start expression:  line=40 column=9
   end expression:    line=40 column=23
 
-Step 427:
+Step 464:
   program counter:   982
   hvm code:          LoadVar binsema
   explanation:       push value (?d["lock"]) of variable "binsema"
@@ -3762,9 +4128,9 @@ Step 427:
   end statement:     line=41 column=24
   source code:       !binsema = False
                       ^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 27506, { "right": None }, ?d["lock"]]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 21890, {:}, ?d["lock"]]
 
-Step 428:
+Step 465:
   program counter:   983
   hvm code:          DelVar binsema
   explanation:       delete method variable binsema
@@ -3772,24 +4138,24 @@ Step 428:
   end expression:    line=41 column=16
   method variables:  { }
 
-Step 429:
+Step 466:
   program counter:   984
   hvm code:          Push False
   explanation:       push constant False
   source code:       !binsema = False
                                 ^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 27506, { "right": None }, ?d["lock"], False]
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 21890, {:}, ?d["lock"], False]
 
-Step 430:
+Step 467:
   program counter:   985
   hvm code:          Store
   explanation:       pop value (False) and address (?d["lock"]) and store
   source code:       !binsema = False
                      ^^^^^^^^^^
-  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 1, "data": [ None, [ 2, "rights" ] ], "head": 0, "lock": False, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 1 } }
-  stack:             [{:}, [], 29906, { "self": 1 }, [], 27506, { "right": None }]
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 2, "data": [ [ 1, "left" ], [ 2, "rights" ] ], "head": 1, "lock": False, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 } }
+  stack:             [{:}, [], 27954, { "self": 1 }, [], 21890, {:}]
 
-Step 431:
+Step 468:
   program counter:   986
   hvm code:          AtomicDec
   explanation:       decrement atomic counter from 1 to 0: no longer atomic
@@ -3798,7 +4164,7 @@ Step 431:
   source code:       atomically:
                      ^^^^^^^^^^^
 
-Step 432:
+Step 469:
   program counter:   987
   hvm code:          ReturnOp(result. None)
   explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
@@ -3806,147 +4172,1340 @@ Step 432:
   end statement:     line=38 column=21
   source code:       def release(binsema):
                      ^^^^^^^^^^^^^^^^^^^^^
-  method variables:  { right: None }
-  call trace:        peek_right_test(1) --> peek_right(?d)
-  stack:             [{:}, [], 29906, { "self": 1 }, None]
+  call trace:        put_left_test(1) --> put_left(?d, [1, "left"])
+  stack:             [{:}, [], 27954, { "self": 1 }, None]
 
-Step 433:
-  program counter:   1720
+Step 470:
+  program counter:   1369
   hvm code:          Pop
   explanation:       pop and discard value ()
   module:            bdeque
-  start statement:   line=107 column=5
-  end statement:     line=107 column=21
+  start statement:   line=32 column=5
+  end statement:     line=32 column=21
   source code:       release(?d->lock)
                      ^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [], 29906, { "self": 1 }]
+  stack:             [{:}, [], 27954, { "self": 1 }]
 
-Step 434:
-  program counter:   1721
-  hvm code:          ReturnOp(right)
+Step 471:
+  program counter:   1370
+  hvm code:          ReturnOp(result. None)
   explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
-  start statement:   line=97 column=1
-  end statement:     line=97 column=32
-  source code:       def peek_right(d) returns right: 
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  start statement:   line=17 column=1
+  end statement:     line=17 column=19
+  source code:       def put_left(d, v):
+                     ^^^^^^^^^^^^^^^^^^^
   method variables:  { self: 1 }
-  call trace:        peek_right_test(1)
+  call trace:        put_left_test(1)
   stack:             [{:}, None]
 
-Step 435:
-  program counter:   1870
-  hvm code:          StoreVar v
-  explanation:       pop value (None) and store locally in variable \"v\"
+Step 472:
+  program counter:   1748
+  hvm code:          Pop
+  explanation:       pop and discard value ()
   module:            __main__
-  start statement:   line=39 column=5
-  end statement:     line=39 column=33
-  source code:       let v = bdeque.peek_right(?d):
-                     ^^^^^^^
-  method variables:  { self: 1, v: None }
+  start statement:   line=14 column=5
+  end statement:     line=14 column=39
+  source code:       bdeque.put_left(?d, (self, "left"))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   stack:             [{:}]
 
-Step 436:
-  program counter:   1871
+Step 473:
+  program counter:   1749
   hvm code:          Push ()
   explanation:       building a tuple: push constant ()
-  start statement:   line=40 column=9
-  end statement:     line=40 column=41
-  source code:       print("done peek right", self, v) 
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  start statement:   line=15 column=5
+  end statement:     line=15 column=32
+  source code:       print("done left put", self)
+                           ^^^^^^^^^^^^^^^^^^^^^
   stack:             [{:}, []]
 
-Step 437:
-  program counter:   1872
-  hvm code:          Push "done peek right"
-  explanation:       push constant "done peek right"
-  source code:       print("done peek right", self, v) 
-                           ^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [], "done peek right"]
+Step 474:
+  program counter:   1750
+  hvm code:          Push "done left put"
+  explanation:       push constant "done left put"
+  source code:       print("done left put", self)
+                           ^^^^^^^^^^^^^^^
+  stack:             [{:}, [], "done left put"]
 
-Step 438:
-  program counter:   1873
+Step 475:
+  program counter:   1751
   hvm code:          2-ary ListAdd
-  explanation:       pop 2 values ("done peek right", []); insert first value into the second; push result (["done peek right"])
-  source code:       print("done peek right", self, v) 
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [ "done peek right" ]]
+  explanation:       pop 2 values ("done left put", []); insert first value into the second; push result (["done left put"])
+  source code:       print("done left put", self)
+                           ^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [ "done left put" ]]
 
-Step 439:
-  program counter:   1874
+Step 476:
+  program counter:   1752
   hvm code:          LoadVar self
   explanation:       push value (1) of variable "self"
-  source code:       print("done peek right", self, v) 
-                                              ^^^^
-  stack:             [{:}, [ "done peek right" ], 1]
+  source code:       print("done left put", self)
+                                            ^^^^
+  stack:             [{:}, [ "done left put" ], 1]
 
-Step 440:
-  program counter:   1875
+Step 477:
+  program counter:   1753
   hvm code:          DelVar self
   explanation:       delete method variable self
-  start expression:  line=40 column=34
-  end expression:    line=40 column=37
-  method variables:  { v: None }
-
-Step 441:
-  program counter:   1876
-  hvm code:          2-ary ListAdd
-  explanation:       pop 2 values (1, ["done peek right"]); insert first value into the second; push result (["done peek right", 1])
-  source code:       print("done peek right", self, v) 
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [ "done peek right", 1 ]]
-
-Step 442:
-  program counter:   1877
-  hvm code:          LoadVar v
-  explanation:       push value (None) of variable "v"
-  source code:       print("done peek right", self, v) 
-                                                    ^
-  stack:             [{:}, [ "done peek right", 1 ], None]
-
-Step 443:
-  program counter:   1878
-  hvm code:          DelVar v
-  explanation:       delete method variable v
-  start expression:  line=40 column=40
-  end expression:    line=40 column=40
+  start expression:  line=15 column=28
+  end expression:    line=15 column=31
   method variables:  { }
 
-Step 444:
-  program counter:   1879
+Step 478:
+  program counter:   1754
   hvm code:          2-ary ListAdd
-  explanation:       pop 2 values (None, ["done peek right", 1]); insert first value into the second; push result (["done peek right", 1, None])
-  source code:       print("done peek right", self, v) 
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  stack:             [{:}, [ "done peek right", 1, None ]]
+  explanation:       pop 2 values (1, ["done left put"]); insert first value into the second; push result (["done left put", 1])
+  source code:       print("done left put", self)
+                           ^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [ "done left put", 1 ]]
 
-Step 445:
-  program counter:   1880
+================================================
+Running thread T5: get_right_test(1)
+mode:  runnable
+stack: ['1']
+other threads:
+  T0: pc=1966 terminated atomic __init__()
+  T1: pc=1755 runnable put_left_test(1)
+    about to print [ "done left put", 1 ]
+  T2: pc=1758 runnable put_right_test(1)
+    about to run method put_right_test with argument 1
+  T3: pc=1785 terminated put_right_test(2)
+  T4: pc=1787 runnable get_left_test(1)
+    about to run method get_left_test with argument 1
+  T6: pc=1859 runnable peek_right_test(1)
+    about to run method peek_right_test with argument 1
+shared variables:
+  alloc$next: 0
+  alloc$pool: {:}
+  d: { "count": 2, "data": [ [ 1, "left" ], [ 2, "rights" ] ], "head": 1, "lock": False, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 }
+state id: 80293
+================================================
+
+Step 479:
+  program counter:   1811
+  hvm code:          Frame get_right_test(self)
+  explanation:       pop argument (1), assign to self, and run method "get_right_test"
+  start statement:   line=27 column=1
+  end statement:     line=27 column=25
+  source code:       def get_right_test(self):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  method variables:  { self: 1 }
+  call trace:        get_right_test(1)
+  stack:             [{:}]
+
+Step 480:
+  program counter:   1812
+  hvm code:          Push ()
+  explanation:       building a tuple: push constant ()
+  start statement:   line=28 column=5
+  end statement:     line=28 column=33
+  source code:       print("call right get", self)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, []]
+
+Step 481:
+  program counter:   1813
+  hvm code:          Push "call right get"
+  explanation:       push constant "call right get"
+  source code:       print("call right get", self)
+                           ^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], "call right get"]
+
+Step 482:
+  program counter:   1814
+  hvm code:          2-ary ListAdd
+  explanation:       pop 2 values ("call right get", []); insert first value into the second; push result (["call right get"])
+  source code:       print("call right get", self)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [ "call right get" ]]
+
+Step 483:
+  program counter:   1815
+  hvm code:          LoadVar self
+  explanation:       push value (1) of variable "self"
+  source code:       print("call right get", self)
+                                             ^^^^
+  stack:             [{:}, [ "call right get" ], 1]
+
+Step 484:
+  program counter:   1816
+  hvm code:          2-ary ListAdd
+  explanation:       pop 2 values (1, ["call right get"]); insert first value into the second; push result (["call right get", 1])
+  source code:       print("call right get", self)
+                           ^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [ "call right get", 1 ]]
+
+Step 485:
+  program counter:   1817
   hvm code:          Print
-  explanation:       pop value (["done peek right", 1, None]) and add to print log
-  source code:       print("done peek right", self, v) 
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  call trace:        peek_right_test(1)
+  explanation:       pop value (["call right get", 1]) and add to print log
+  source code:       print("call right get", self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  call trace:        get_right_test(1)
+  stack:             [{:}]
+
+Step 486:
+  program counter:   1818
+  hvm code:          Push PC(1538)
+  explanation:       push program counter constant 1538 ()
+  start statement:   line=29 column=5
+  end statement:     line=29 column=32
+  source code:       let v = bdeque.get_right(?d):
+                             ^^^^^^^^^^^^^^^^
+  stack:             [{:}, PC(1538)]
+
+Step 487:
+  program counter:   1819
+  hvm code:          Push ?d
+  explanation:       push constant ?d
+  source code:       let v = bdeque.get_right(?d):
+                                               ^
+  stack:             [{:}, PC(1538), ?d]
+
+Step 488:
+  program counter:   1820
+  hvm code:          2-ary Closure
+  explanation:       pop 2 values (?d, PC(1538)); push result (?PC(1538)[?d])
+  source code:       let v = bdeque.get_right(?d):
+                             ^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, ?PC(1538)[?d]]
+
+Step 489:
+  program counter:   1821
+  hvm code:          Load
+  explanation:       pop an argument (?d) and call method (1538: "get_right")
+  start expression:  line=29 column=13
+  end expression:    line=29 column=32
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, ?d]
+
+Step 490:
+  program counter:   1538
+  hvm code:          Frame get_right(d)
+  explanation:       pop argument (?d), assign to d, and run method "get_right"
+  module:            bdeque
+  start statement:   line=68 column=1
+  end statement:     line=68 column=31
+  source code:       def get_right(d) returns right:
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  method variables:  { d: ?d }
+  stack:             [{:}, [], 29138, { "self": 1 }]
+
+Step 491:
+  program counter:   1539
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=74 column=5
+  end statement:     line=74 column=21
+  source code:       acquire(?d->lock)
+                              ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d]
+
+Step 492:
+  program counter:   1540
+  hvm code:          Push "lock"
+  explanation:       push constant "lock"
+  source code:       acquire(?d->lock)
+                                 ^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d, "lock"]
+
+Step 493:
+  program counter:   1541
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("lock", ?d); push result (?d["lock"])
+  source code:       acquire(?d->lock)
+                              ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["lock"]]
+
+Step 494:
+  program counter:   1542
+  hvm code:          Apply PC(954)
+  explanation:       pop an argument (?d["lock"]) and call method (954: "acquire")
+  source code:       acquire(?d->lock)
+                     ^^^^^^^^^^^^^^^^^
+  call trace:        get_right_test(1) --> get_right(?d) --> acquire(?d["lock"])
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 24674, ?d["lock"]]
+
+Step 495:
+  program counter:   954
+  hvm code:          Frame acquire(binsema)
+  explanation:       pop argument (?d["lock"]), assign to binsema, and run method "acquire"
+  module:            synch
+  start statement:   line=34 column=1
+  end statement:     line=34 column=21
+  source code:       def acquire(binsema):
+                     ^^^^^^^^^^^^^^^^^^^^^
+  method variables:  { binsema: ?d["lock"] }
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 24674, { "d": ?d }]
+
+Step 496:
+  program counter:   955
+  hvm code:          AtomicInc(eager)
+  explanation:       increment atomic counter from 0 to 1: becomes atomic
+  start statement:   line=35 column=16
+  end statement:     line=37 column=6
+  source code:       atomically when not !binsema:
+  call trace:        get_right_test(1) --> get_right(?d) --> acquire(?d["lock"])
+
+Step 497:
+  program counter:   956
+  hvm code:          ReadonlyInc
+  explanation:       increment readonly counter from 0 to 1: becomes readonly
+  source code:       atomically when not !binsema:
+
+Step 498:
+  program counter:   957
+  hvm code:          LoadVar binsema
+  explanation:       push value (?d["lock"]) of variable "binsema"
+  start statement:   line=35 column=16
+  end statement:     line=35 column=32
+  source code:       atomically when not !binsema:
+                                          ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 24674, { "d": ?d }, ?d["lock"]]
+
+Step 499:
+  program counter:   958
+  hvm code:          Load
+  explanation:       pop address (?d["lock"]) and push value (False)
+  source code:       atomically when not !binsema:
+                                         ^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 24674, { "d": ?d }, False]
+
+Step 500:
+  program counter:   959
+  hvm code:          1-ary not
+  explanation:       pop a value (False); logical not; push result (True)
+  source code:       atomically when not !binsema:
+                                     ^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 24674, { "d": ?d }, True]
+
+Step 501:
+  program counter:   960
+  hvm code:          JumpCond False 962
+  explanation:       pop value (True), compare to False, and jump to 962 if the same
+  source code:       atomically when not !binsema:
+                                ^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 24674, { "d": ?d }]
+
+Step 502:
+  program counter:   961
+  hvm code:          Jump 965
+  explanation:       set program counter to 965
+  source code:       atomically when not !binsema:
+                                                ^
+
+Step 503:
+  program counter:   965
+  hvm code:          ReadonlyDec
+  explanation:       decrement readonly counter from 1 to 0: no longer readonly
+  source code:       atomically when not !binsema:
+                                ^^^^^^^^^^^^^^^^^
+
+Step 504:
+  program counter:   966
+  hvm code:          LoadVar binsema
+  explanation:       push value (?d["lock"]) of variable "binsema"
+  start statement:   line=36 column=9
+  end statement:     line=36 column=23
+  source code:       !binsema = True
+                      ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 24674, { "d": ?d }, ?d["lock"]]
+
+Step 505:
+  program counter:   967
+  hvm code:          DelVar binsema
+  explanation:       delete method variable binsema
+  start expression:  line=36 column=10
+  end expression:    line=36 column=16
+  method variables:  { }
+
+Step 506:
+  program counter:   968
+  hvm code:          Push True
+  explanation:       push constant True
+  source code:       !binsema = True
+                                ^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 24674, { "d": ?d }, ?d["lock"], True]
+
+Step 507:
+  program counter:   969
+  hvm code:          Store
+  explanation:       pop value (True) and address (?d["lock"]) and store
+  source code:       !binsema = True
+                     ^^^^^^^^^^
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 2, "data": [ [ 1, "left" ], [ 2, "rights" ] ], "head": 1, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 } }
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 24674, { "d": ?d }]
+
+Step 508:
+  program counter:   970
+  hvm code:          AtomicDec
+  explanation:       decrement atomic counter from 1 to 0: no longer atomic
+  start statement:   line=35 column=16
+  end statement:     line=35 column=32
+  source code:       atomically when not !binsema:
+                                ^^^^^^^^^^^^^^^^^
+
+Step 509:
+  program counter:   971
+  hvm code:          ReturnOp(result. None)
+  explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
+  start statement:   line=34 column=1
+  end statement:     line=34 column=21
+  source code:       def acquire(binsema):
+                     ^^^^^^^^^^^^^^^^^^^^^
+  method variables:  { d: ?d }
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }, None]
+
+Step 510:
+  program counter:   1543
+  hvm code:          Pop
+  explanation:       pop and discard value ()
+  module:            bdeque
+  start statement:   line=74 column=5
+  end statement:     line=74 column=21
+  source code:       acquire(?d->lock)
+                     ^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }]
+
+Step 511:
+  program counter:   1544
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=75 column=5
+  end statement:     line=75 column=24
+  source code:       while d->count == 0:
+                           ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d]
+
+Step 512:
+  program counter:   1545
+  hvm code:          Push "count"
+  explanation:       push constant "count"
+  source code:       while d->count == 0:
+                              ^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d, "count"]
+
+Step 513:
+  program counter:   1546
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("count", ?d); push result (?d["count"])
+  source code:       while d->count == 0:
+                           ^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["count"]]
+
+Step 514:
+  program counter:   1547
+  hvm code:          Load
+  explanation:       pop address (?d["count"]) and push value (2)
+  start expression:  line=75 column=11
+  end expression:    line=75 column=18
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }, 2]
+
+Step 515:
+  program counter:   1548
+  hvm code:          Push 0
+  explanation:       push constant 0
+  source code:       while d->count == 0:
+                                       ^
+  stack:             [{:}, [], 29138, { "self": 1 }, 2, 0]
+
+Step 516:
+  program counter:   1549
+  hvm code:          2-ary ==
+  explanation:       pop 2 values (0, 2); check if both values are the same; push result (False)
+  source code:       while d->count == 0:
+                           ^^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, False]
+
+Step 517:
+  program counter:   1550
+  hvm code:          JumpCond False 1563
+  explanation:       pop value (False), compare to False, and jump to 1563 if the same
+  source code:       while d->count == 0:
+                     ^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }]
+
+Step 518:
+  program counter:   1563
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=77 column=5
+  end statement:     line=77 column=37
+  source code:       d->tail = (d->head - 1) % d->size
+                     ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d]
+
+Step 519:
+  program counter:   1564
+  hvm code:          Push "tail"
+  explanation:       push constant "tail"
+  source code:       d->tail = (d->head - 1) % d->size
+                        ^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d, "tail"]
+
+Step 520:
+  program counter:   1565
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("tail", ?d); push result (?d["tail"])
+  source code:       d->tail = (d->head - 1) % d->size
+                     ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"]]
+
+Step 521:
+  program counter:   1566
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  source code:       d->tail = (d->head - 1) % d->size
+                                ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"], ?d]
+
+Step 522:
+  program counter:   1567
+  hvm code:          Push "head"
+  explanation:       push constant "head"
+  source code:       d->tail = (d->head - 1) % d->size
+                                   ^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"], ?d, "head"]
+
+Step 523:
+  program counter:   1568
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("head", ?d); push result (?d["head"])
+  source code:       d->tail = (d->head - 1) % d->size
+                                ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"], ?d["head"]]
+
+Step 524:
+  program counter:   1569
+  hvm code:          Load
+  explanation:       pop address (?d["head"]) and push value (1)
+  start expression:  line=77 column=16
+  end expression:    line=77 column=22
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"], 1]
+
+Step 525:
+  program counter:   1570
+  hvm code:          Push 1
+  explanation:       push constant 1
+  source code:       d->tail = (d->head - 1) % d->size
+                                          ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"], 1, 1]
+
+Step 526:
+  program counter:   1571
+  hvm code:          2-ary -
+  explanation:       pop 2 values (1, 1); the second integer minus the first; push result (0)
+  source code:       d->tail = (d->head - 1) % d->size
+                                ^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"], 0]
+
+Step 527:
+  program counter:   1572
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  source code:       d->tail = (d->head - 1) % d->size
+                                               ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"], 0, ?d]
+
+Step 528:
+  program counter:   1573
+  hvm code:          Push "size"
+  explanation:       push constant "size"
+  source code:       d->tail = (d->head - 1) % d->size
+                                                  ^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"], 0, ?d, "size"]
+
+Step 529:
+  program counter:   1574
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("size", ?d); push result (?d["size"])
+  source code:       d->tail = (d->head - 1) % d->size
+                                               ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"], 0, ?d["size"]]
+
+Step 530:
+  program counter:   1575
+  hvm code:          Load
+  explanation:       pop address (?d["size"]) and push value (2)
+  start expression:  line=77 column=31
+  end expression:    line=77 column=37
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"], 0, 2]
+
+Step 531:
+  program counter:   1576
+  hvm code:          2-ary %
+  explanation:       pop 2 values (2, 0); second value modulo the first; push result (0)
+  source code:       d->tail = (d->head - 1) % d->size
+                               ^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["tail"], 0]
+
+Step 532:
+  program counter:   1577
+  hvm code:          Store
+  explanation:       pop value (0) and address (?d["tail"]) and store
+  source code:       d->tail = (d->head - 1) % d->size
+                     ^^^^^^^^^
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }]
+
+Step 533:
+  program counter:   1578
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=78 column=5
+  end statement:     line=78 column=28
+  source code:       right = d->data[d->tail]
+                             ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d]
+
+Step 534:
+  program counter:   1579
+  hvm code:          Push "data"
+  explanation:       push constant "data"
+  source code:       right = d->data[d->tail]
+                                ^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d, "data"]
+
+Step 535:
+  program counter:   1580
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("data", ?d); push result (?d["data"])
+  source code:       right = d->data[d->tail]
+                             ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["data"]]
+
+Step 536:
+  program counter:   1581
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  source code:       right = d->data[d->tail]
+                                     ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["data"], ?d]
+
+Step 537:
+  program counter:   1582
+  hvm code:          Push "tail"
+  explanation:       push constant "tail"
+  source code:       right = d->data[d->tail]
+                                        ^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["data"], ?d, "tail"]
+
+Step 538:
+  program counter:   1583
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("tail", ?d); push result (?d["tail"])
+  source code:       right = d->data[d->tail]
+                                     ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["data"], ?d["tail"]]
+
+Step 539:
+  program counter:   1584
+  hvm code:          Load
+  explanation:       pop address (?d["tail"]) and push value (0)
+  start expression:  line=78 column=21
+  end expression:    line=78 column=27
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["data"], 0]
+
+Step 540:
+  program counter:   1585
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values (0, ?d["data"]); push result (?d["data"][0])
+  source code:       right = d->data[d->tail]
+                             ^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["data"][0]]
+
+Step 541:
+  program counter:   1586
+  hvm code:          Load
+  explanation:       pop address (?d["data"][0]) and push value ([1, "left"])
+  start expression:  line=78 column=13
+  end expression:    line=78 column=28
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }, [ 1, "left" ]]
+
+Step 542:
+  program counter:   1587
+  hvm code:          StoreVar right
+  explanation:       pop value ([1, "left"]) and store locally in variable \"right\"
+  source code:       right = d->data[d->tail]
+                     ^^^^^^^
+  method variables:  { d: ?d, right: [ 1, "left" ] }
+  stack:             [{:}, [], 29138, { "self": 1 }]
+
+Step 543:
+  program counter:   1588
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=79 column=5
+  end statement:     line=79 column=17
+  source code:       d->count -= 1
+                     ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d]
+
+Step 544:
+  program counter:   1589
+  hvm code:          Push "count"
+  explanation:       push constant "count"
+  source code:       d->count -= 1
+                        ^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d, "count"]
+
+Step 545:
+  program counter:   1590
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("count", ?d); push result (?d["count"])
+  source code:       d->count -= 1
+                     ^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["count"]]
+
+Step 546:
+  program counter:   1591
+  hvm code:          Dup
+  explanation:       push a copy of the top value on the stack
+  source code:       d->count -= 1
+                     ^^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["count"], ?d["count"]]
+
+Step 547:
+  program counter:   1592
+  hvm code:          Load
+  explanation:       pop address (?d["count"]) and push value (2)
+  start expression:  line=79 column=5
+  end expression:    line=79 column=17
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["count"], 2]
+
+Step 548:
+  program counter:   1593
+  hvm code:          Push 1
+  explanation:       push constant 1
+  source code:       d->count -= 1
+                                 ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["count"], 2, 1]
+
+Step 549:
+  program counter:   1594
+  hvm code:          2-ary -
+  explanation:       pop 2 values (1, 2); the second integer minus the first; push result (1)
+  source code:       d->count -= 1
+                     ^^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["count"], 1]
+
+Step 550:
+  program counter:   1595
+  hvm code:          Store
+  explanation:       pop value (1) and address (?d["count"]) and store
+  source code:       d->count -= 1
+                     ^^^^^^^^^^^
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 1, "data": [ [ 1, "left" ], [ 2, "rights" ] ], "head": 1, "lock": True, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 } }
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }]
+
+Step 551:
+  program counter:   1596
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=81 column=5
+  end statement:     line=81 column=33
+  source code:       if d->count == (d->size - 1):
+                        ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d]
+
+Step 552:
+  program counter:   1597
+  hvm code:          Push "count"
+  explanation:       push constant "count"
+  source code:       if d->count == (d->size - 1):
+                           ^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d, "count"]
+
+Step 553:
+  program counter:   1598
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("count", ?d); push result (?d["count"])
+  source code:       if d->count == (d->size - 1):
+                        ^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["count"]]
+
+Step 554:
+  program counter:   1599
+  hvm code:          Load
+  explanation:       pop address (?d["count"]) and push value (1)
+  start expression:  line=81 column=8
+  end expression:    line=81 column=15
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }, 1]
+
+Step 555:
+  program counter:   1600
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  source code:       if d->count == (d->size - 1):
+                                     ^
+  stack:             [{:}, [], 29138, { "self": 1 }, 1, ?d]
+
+Step 556:
+  program counter:   1601
+  hvm code:          Push "size"
+  explanation:       push constant "size"
+  source code:       if d->count == (d->size - 1):
+                                        ^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, 1, ?d, "size"]
+
+Step 557:
+  program counter:   1602
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("size", ?d); push result (?d["size"])
+  source code:       if d->count == (d->size - 1):
+                                     ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, 1, ?d["size"]]
+
+Step 558:
+  program counter:   1603
+  hvm code:          Load
+  explanation:       pop address (?d["size"]) and push value (2)
+  start expression:  line=81 column=21
+  end expression:    line=81 column=27
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }, 1, 2]
+
+Step 559:
+  program counter:   1604
+  hvm code:          Push 1
+  explanation:       push constant 1
+  source code:       if d->count == (d->size - 1):
+                                               ^
+  stack:             [{:}, [], 29138, { "self": 1 }, 1, 2, 1]
+
+Step 560:
+  program counter:   1605
+  hvm code:          2-ary -
+  explanation:       pop 2 values (1, 2); the second integer minus the first; push result (1)
+  source code:       if d->count == (d->size - 1):
+                                     ^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, 1, 1]
+
+Step 561:
+  program counter:   1606
+  hvm code:          2-ary ==
+  explanation:       pop 2 values (1, 1); check if both values are the same; push result (True)
+  source code:       if d->count == (d->size - 1):
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, True]
+
+Step 562:
+  program counter:   1607
+  hvm code:          JumpCond False 1613
+  explanation:       pop value (True), compare to False, and jump to 1613 if the same
+  source code:       if d->count == (d->size - 1):
+                     ^^
+  stack:             [{:}, [], 29138, { "self": 1 }]
+
+Step 563:
+  program counter:   1608
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=82 column=9
+  end statement:     line=82 column=31
+  source code:       notifyAll(?d->not_full) 
+                                ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d]
+
+Step 564:
+  program counter:   1609
+  hvm code:          Push "not_full"
+  explanation:       push constant "not_full"
+  source code:       notifyAll(?d->not_full) 
+                                   ^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d, "not_full"]
+
+Step 565:
+  program counter:   1610
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("not_full", ?d); push result (?d["not_full"])
+  source code:       notifyAll(?d->not_full) 
+                                ^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["not_full"]]
+
+Step 566:
+  program counter:   1611
+  hvm code:          Apply PC(1097)
+  explanation:       pop an argument (?d["not_full"]) and call method (1097: "notifyAll")
+  source code:       notifyAll(?d->not_full) 
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  call trace:        get_right_test(1) --> get_right(?d) --> notifyAll(?d["not_full"])
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, ?d["not_full"]]
+
+Step 567:
+  program counter:   1097
+  hvm code:          Frame notifyAll(c)
+  explanation:       pop argument (?d["not_full"]), assign to c, and run method "notifyAll"
+  module:            synch
+  start statement:   line=60 column=1
+  end statement:     line=60 column=17
+  source code:       def notifyAll(c):
+                     ^^^^^^^^^^^^^^^^^
+  method variables:  { c: ?d["not_full"] }
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, { "d": ?d, "right": [ 1, "left" ] }]
+
+Step 568:
+  program counter:   1098
+  hvm code:          AtomicInc(eager)
+  explanation:       increment atomic counter from 0 to 1: becomes atomic
+  start statement:   line=61 column=16
+  end statement:     line=61 column=31
+  source code:       atomically !c = bag.empty()
+                                ^^^^^^^^^^^^^^^^
+  call trace:        get_right_test(1) --> get_right(?d) --> notifyAll(?d["not_full"])
+
+Step 569:
+  program counter:   1099
+  hvm code:          LoadVar c
+  explanation:       push value (?d["not_full"]) of variable "c"
+  source code:       atomically !c = bag.empty()
+                                 ^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, { "d": ?d, "right": [ 1, "left" ] }, ?d["not_full"]]
+
+Step 570:
+  program counter:   1100
+  hvm code:          DelVar c
+  explanation:       delete method variable c
+  start expression:  line=61 column=17
+  end expression:    line=61 column=17
+  method variables:  { }
+
+Step 571:
+  program counter:   1101
+  hvm code:          Push PC(541)
+  explanation:       push program counter constant 541 ()
+  source code:       atomically !c = bag.empty()
+                                     ^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, { "d": ?d, "right": [ 1, "left" ] }, ?d["not_full"], PC(541)]
+
+Step 572:
+  program counter:   1102
+  hvm code:          Push ()
+  explanation:       push constant ()
+  source code:       atomically !c = bag.empty()
+                                              ^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, { "d": ?d, "right": [ 1, "left" ] }, ?d["not_full"], PC(541), []]
+
+Step 573:
+  program counter:   1103
+  hvm code:          2-ary Closure
+  explanation:       pop 2 values ([], PC(541)); push result (?PC(541)[[]])
+  source code:       atomically !c = bag.empty()
+                                     ^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, { "d": ?d, "right": [ 1, "left" ] }, ?d["not_full"], ?PC(541)[[]]]
+
+Step 574:
+  program counter:   1104
+  hvm code:          Load
+  explanation:       pop an argument ([]) and call method (541: "empty")
+  start expression:  line=61 column=21
+  end expression:    line=61 column=31
+  call trace:        get_right_test(1) --> get_right(?d) --> notifyAll(?d["not_full"]) --> empty()
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, { "d": ?d, "right": [ 1, "left" ] }, ?d["not_full"], [], 17666, []]
+
+Step 575:
+  program counter:   541
+  hvm code:          Frame empty()
+  explanation:       pop argument () and run method "empty"
+  module:            bag
+  start statement:   line=1 column=1
+  end statement:     line=1 column=23
+  source code:       def empty() returns bg:
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, { "d": ?d, "right": [ 1, "left" ] }, ?d["not_full"], [], 17666, {:}]
+
+Step 576:
+  program counter:   542
+  hvm code:          Push {:}
+  explanation:       push constant {:}
+  start statement:   line=2 column=5
+  end statement:     line=2 column=12
+  source code:       bg = {:}
+                          ^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, { "d": ?d, "right": [ 1, "left" ] }, ?d["not_full"], [], 17666, {:}, {:}]
+
+Step 577:
+  program counter:   543
+  hvm code:          StoreVar bg
+  explanation:       pop value ({:}) and store locally in variable \"bg\"
+  source code:       bg = {:}
+                     ^^^^
+  method variables:  { bg: {:} }
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, { "d": ?d, "right": [ 1, "left" ] }, ?d["not_full"], [], 17666, {:}]
+
+Step 578:
+  program counter:   544
+  hvm code:          ReturnOp(bg)
+  explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
+  start statement:   line=1 column=1
+  end statement:     line=1 column=23
+  source code:       def empty() returns bg:
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  method variables:  { }
+  call trace:        get_right_test(1) --> get_right(?d) --> notifyAll(?d["not_full"])
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, { "d": ?d, "right": [ 1, "left" ] }, ?d["not_full"], {:}]
+
+Step 579:
+  program counter:   1105
+  hvm code:          Store
+  explanation:       pop value ({:}) and address (?d["not_full"]) and store
+  module:            synch
+  start statement:   line=61 column=16
+  end statement:     line=61 column=31
+  source code:       atomically !c = bag.empty()
+                                ^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25778, { "d": ?d, "right": [ 1, "left" ] }]
+
+Step 580:
+  program counter:   1106
+  hvm code:          AtomicDec
+  explanation:       decrement atomic counter from 1 to 0: no longer atomic
+  source code:       atomically !c = bag.empty()
+                                ^^^^^^^^^^^^^^^^
+
+Step 581:
+  program counter:   1107
+  hvm code:          ReturnOp(result. None)
+  explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
+  start statement:   line=60 column=1
+  end statement:     line=60 column=17
+  source code:       def notifyAll(c):
+                     ^^^^^^^^^^^^^^^^^
+  method variables:  { d: ?d, right: [ 1, "left" ] }
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }, None]
+
+Step 582:
+  program counter:   1612
+  hvm code:          Pop
+  explanation:       pop and discard value ()
+  module:            bdeque
+  start statement:   line=82 column=9
+  end statement:     line=82 column=31
+  source code:       notifyAll(?d->not_full) 
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }]
+
+Step 583:
+  program counter:   1613
+  hvm code:          LoadVar d
+  explanation:       push value (?d) of variable "d"
+  start statement:   line=83 column=5
+  end statement:     line=83 column=21
+  source code:       release(?d->lock)
+                              ^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d]
+
+Step 584:
+  program counter:   1614
+  hvm code:          DelVar d
+  explanation:       delete method variable d
+  start expression:  line=83 column=14
+  end expression:    line=83 column=14
+  method variables:  { right: [ 1, "left" ] }
+
+Step 585:
+  program counter:   1615
+  hvm code:          Push "lock"
+  explanation:       push constant "lock"
+  source code:       release(?d->lock)
+                                 ^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d, "lock"]
+
+Step 586:
+  program counter:   1616
+  hvm code:          2-ary AddArg
+  explanation:       pop 2 values ("lock", ?d); push result (?d["lock"])
+  source code:       release(?d->lock)
+                              ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, ?d["lock"]]
+
+Step 587:
+  program counter:   1617
+  hvm code:          Apply PC(973)
+  explanation:       pop an argument (?d["lock"]) and call method (973: "release")
+  source code:       release(?d->lock)
+                     ^^^^^^^^^^^^^^^^^
+  call trace:        get_right_test(1) --> get_right(?d) --> release(?d["lock"])
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25874, ?d["lock"]]
+
+Step 588:
+  program counter:   973
+  hvm code:          Frame release(binsema)
+  explanation:       pop argument (?d["lock"]), assign to binsema, and run method "release"
+  module:            synch
+  start statement:   line=38 column=1
+  end statement:     line=38 column=21
+  source code:       def release(binsema):
+                     ^^^^^^^^^^^^^^^^^^^^^
+  method variables:  { binsema: ?d["lock"] }
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25874, { "right": [ 1, "left" ] }]
+
+Step 589:
+  program counter:   974
+  hvm code:          AtomicInc(eager)
+  explanation:       increment atomic counter from 0 to 1: becomes atomic
+  start statement:   line=39 column=5
+  end statement:     line=39 column=15
+  source code:       atomically:
+                     ^^^^^^^^^^^
+  call trace:        get_right_test(1) --> get_right(?d) --> release(?d["lock"])
+
+Step 590:
+  program counter:   975
+  hvm code:          AtomicInc(lazy)
+  explanation:       increment atomic counter from 1 to 2: remains atomic
+  start statement:   line=40 column=9
+  end statement:     line=40 column=23
+  source code:       assert !binsema
+                     ^^^^^^^^^^^^^^^
+
+Step 591:
+  program counter:   976
+  hvm code:          ReadonlyInc
+  explanation:       increment readonly counter from 0 to 1: becomes readonly
+  start expression:  line=40 column=9
+  end expression:    line=40 column=23
+
+Step 592:
+  program counter:   977
+  hvm code:          LoadVar binsema
+  explanation:       push value (?d["lock"]) of variable "binsema"
+  source code:       assert !binsema
+                             ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25874, { "right": [ 1, "left" ] }, ?d["lock"]]
+
+Step 593:
+  program counter:   978
+  hvm code:          Load
+  explanation:       pop address (?d["lock"]) and push value (True)
+  source code:       assert !binsema
+                            ^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25874, { "right": [ 1, "left" ] }, True]
+
+Step 594:
+  program counter:   979
+  hvm code:          Assert
+  explanation:       pop a value (True); do not raise exception
+  source code:       assert !binsema
+                     ^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25874, { "right": [ 1, "left" ] }]
+
+Step 595:
+  program counter:   980
+  hvm code:          ReadonlyDec
+  explanation:       decrement readonly counter from 1 to 0: no longer readonly
+  source code:       assert !binsema
+                     ^^^^^^^^^^^^^^^
+
+Step 596:
+  program counter:   981
+  hvm code:          AtomicDec
+  explanation:       decrement atomic counter from 2 to 1: remains atomic
+  start expression:  line=40 column=9
+  end expression:    line=40 column=23
+
+Step 597:
+  program counter:   982
+  hvm code:          LoadVar binsema
+  explanation:       push value (?d["lock"]) of variable "binsema"
+  start statement:   line=41 column=9
+  end statement:     line=41 column=24
+  source code:       !binsema = False
+                      ^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25874, { "right": [ 1, "left" ] }, ?d["lock"]]
+
+Step 598:
+  program counter:   983
+  hvm code:          DelVar binsema
+  explanation:       delete method variable binsema
+  start expression:  line=41 column=10
+  end expression:    line=41 column=16
+  method variables:  { }
+
+Step 599:
+  program counter:   984
+  hvm code:          Push False
+  explanation:       push constant False
+  source code:       !binsema = False
+                                ^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25874, { "right": [ 1, "left" ] }, ?d["lock"], False]
+
+Step 600:
+  program counter:   985
+  hvm code:          Store
+  explanation:       pop value (False) and address (?d["lock"]) and store
+  source code:       !binsema = False
+                     ^^^^^^^^^^
+  shared variables:  { alloc$next: 0, alloc$pool: {:}, d: { "count": 1, "data": [ [ 1, "left" ], [ 2, "rights" ] ], "head": 1, "lock": False, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 } }
+  stack:             [{:}, [], 29138, { "self": 1 }, [], 25874, { "right": [ 1, "left" ] }]
+
+Step 601:
+  program counter:   986
+  hvm code:          AtomicDec
+  explanation:       decrement atomic counter from 1 to 0: no longer atomic
+  start statement:   line=39 column=5
+  end statement:     line=39 column=15
+  source code:       atomically:
+                     ^^^^^^^^^^^
+
+Step 602:
+  program counter:   987
+  hvm code:          ReturnOp(result. None)
+  explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
+  start statement:   line=38 column=1
+  end statement:     line=38 column=21
+  source code:       def release(binsema):
+                     ^^^^^^^^^^^^^^^^^^^^^
+  method variables:  { right: [ 1, "left" ] }
+  call trace:        get_right_test(1) --> get_right(?d)
+  stack:             [{:}, [], 29138, { "self": 1 }, None]
+
+Step 603:
+  program counter:   1618
+  hvm code:          Pop
+  explanation:       pop and discard value ()
+  module:            bdeque
+  start statement:   line=83 column=5
+  end statement:     line=83 column=21
+  source code:       release(?d->lock)
+                     ^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], 29138, { "self": 1 }]
+
+Step 604:
+  program counter:   1619
+  hvm code:          ReturnOp(right)
+  explanation:       pop caller's method variables and pc and push result (), or terminate if no caller
+  start statement:   line=68 column=1
+  end statement:     line=68 column=31
+  source code:       def get_right(d) returns right:
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  method variables:  { self: 1 }
+  call trace:        get_right_test(1)
+  stack:             [{:}, [ 1, "left" ]]
+
+Step 605:
+  program counter:   1822
+  hvm code:          StoreVar v
+  explanation:       pop value ([1, "left"]) and store locally in variable \"v\"
+  module:            __main__
+  start statement:   line=29 column=5
+  end statement:     line=29 column=32
+  source code:       let v = bdeque.get_right(?d):
+                     ^^^^^^^
+  method variables:  { self: 1, v: [ 1, "left" ] }
+  stack:             [{:}]
+
+Step 606:
+  program counter:   1823
+  hvm code:          Push ()
+  explanation:       building a tuple: push constant ()
+  start statement:   line=30 column=9
+  end statement:     line=30 column=40
+  source code:       print("done right get", self, v)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, []]
+
+Step 607:
+  program counter:   1824
+  hvm code:          Push "done right get"
+  explanation:       push constant "done right get"
+  source code:       print("done right get", self, v)
+                           ^^^^^^^^^^^^^^^^
+  stack:             [{:}, [], "done right get"]
+
+Step 608:
+  program counter:   1825
+  hvm code:          2-ary ListAdd
+  explanation:       pop 2 values ("done right get", []); insert first value into the second; push result (["done right get"])
+  source code:       print("done right get", self, v)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [ "done right get" ]]
+
+Step 609:
+  program counter:   1826
+  hvm code:          LoadVar self
+  explanation:       push value (1) of variable "self"
+  source code:       print("done right get", self, v)
+                                             ^^^^
+  stack:             [{:}, [ "done right get" ], 1]
+
+Step 610:
+  program counter:   1827
+  hvm code:          DelVar self
+  explanation:       delete method variable self
+  start expression:  line=30 column=33
+  end expression:    line=30 column=36
+  method variables:  { v: [ 1, "left" ] }
+
+Step 611:
+  program counter:   1828
+  hvm code:          2-ary ListAdd
+  explanation:       pop 2 values (1, ["done right get"]); insert first value into the second; push result (["done right get", 1])
+  source code:       print("done right get", self, v)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [ "done right get", 1 ]]
+
+Step 612:
+  program counter:   1829
+  hvm code:          LoadVar v
+  explanation:       push value ([1, "left"]) of variable "v"
+  source code:       print("done right get", self, v)
+                                                   ^
+  stack:             [{:}, [ "done right get", 1 ], [ 1, "left" ]]
+
+Step 613:
+  program counter:   1830
+  hvm code:          DelVar v
+  explanation:       delete method variable v
+  start expression:  line=30 column=39
+  end expression:    line=30 column=39
+  method variables:  { }
+
+Step 614:
+  program counter:   1831
+  hvm code:          2-ary ListAdd
+  explanation:       pop 2 values ([1, "left"], ["done right get", 1]); insert first value into the second; push result (["done right get", 1, [1, "left"]])
+  source code:       print("done right get", self, v)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  stack:             [{:}, [ "done right get", 1, [ 1, "left" ] ]]
+
+Step 615:
+  program counter:   1832
+  hvm code:          Print
+  explanation:       pop value (["done right get", 1, [1, "left"]]) and add to print log
+  source code:       print("done right get", self, v)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  call trace:        get_right_test(1)
   new mode:          failed
   stack:             [{:}]
-  operation failed:  Behavior failure on ["done peek right", 1, None]
+  operation failed:  Behavior failure on ["done right get", 1, [1, "left"]]
 
 ================================================
 Final state
 ================================================
 Threads:
   T0: pc=1966 terminated atomic __init__()
-  T1: pc=1729 runnable put_left_test(1)
-    about to run method put_left_test with argument 1
+  T1: pc=1755 runnable put_left_test(1)
+    about to print [ "done left put", 1 ]
   T2: pc=1758 runnable put_right_test(1)
     about to run method put_right_test with argument 1
-  T3: pc=1784 runnable put_right_test(2)
-    about to print [ "done right put", 2 ]
+  T3: pc=1785 terminated put_right_test(2)
   T4: pc=1787 runnable get_left_test(1)
     about to run method get_left_test with argument 1
-  T5: pc=1811 runnable get_right_test(1)
-    about to run method get_right_test with argument 1
-  T6: pc=1880 failed peek_right_test(1)
+  T5: pc=1832 failed get_right_test(1)
+  T6: pc=1859 runnable peek_right_test(1)
+    about to run method peek_right_test with argument 1
 Variables:
   alloc$next: 0
   alloc$pool: {:}
-  d: { "count": 1, "data": [ None, [ 2, "rights" ] ], "head": 0, "lock": False, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 1 }
+  d: { "count": 1, "data": [ [ 1, "left" ], [ 2, "rights" ] ], "head": 1, "lock": False, "not_empty": {:}, "not_full": {:}, "size": 2, "tail": 0 }
